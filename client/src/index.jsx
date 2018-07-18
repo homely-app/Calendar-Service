@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Applet from './components/Applet.jsx';
+import Applet from './components/Applet';
 
 // Component level styling
 import './styles/main.css';
