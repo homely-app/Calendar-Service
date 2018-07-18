@@ -11,7 +11,7 @@
     "db:seed": "node generate.js",
     "start": "nodemon server/index.js",
     "react-dev": "webpack -d --watch",
-    "test": "jest"
+    "test": "jest --coverage --changedSince=master"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
@@ -28,7 +28,10 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "css-loader": "^1.0.0",
+    "eslint": "^5.1.0",
+    "eslint-config-airbnb-base": "^13.0.0",
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
+    "eslint-plugin-import": "^2.13.0",
     "faker": "^4.1.0",
     "style-loader": "^0.21.0",
     "webpack": "^4.16.1",
