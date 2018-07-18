@@ -1,31 +1,37 @@
 {
-  "name": "",
-  "version": "",
-  "description": "",
-  "author": "",
+  "name": "bookingcomponent",
+  "version": "1.0.0",
+  "description": "an airbnb booking component",
+  "author": "Nicholas Vincent-Hill",
   "license": "",
   "engines": {
     "node": ">=6.13.0"
   },
   "scripts": {
     "db:seed": "node generate.js",
-    "start": "nodemon server"
+    "start": "nodemon server/index.js",
+    "react-dev": "webpack -d --watch",
+    "test": "jest"
   },
   "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "mongoose": "^5.2.4",
+    "npm": "^6.2.0",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-fontawesome": "^1.6.1"
+  },
+  "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "css-loader": "^1.0.0",
-    "express": "^4.16.3",
-    "mongoose": "^5.2.4",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
+    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
+    "faker": "^4.1.0",
     "style-loader": "^0.21.0",
     "webpack": "^4.16.1",
     "webpack-cli": "^3.0.8"
-  },
-  "devDependencies": {
-    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor"
   }
 }
