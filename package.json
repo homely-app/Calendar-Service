@@ -2,7 +2,7 @@
   "name": "bookingcomponent",
   "version": "1.0.0",
   "description": "an airbnb booking component",
-  "author": "",
+  "author": "Nicholas Vincent-Hill",
   "license": "",
   "engines": {
     "node": ">=6.13.0"
