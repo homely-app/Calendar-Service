@@ -1,7 +1,7 @@
 {
-  "name": "",
-  "version": "",
-  "description": "",
+  "name": "bookingcomponent",
+  "version": "1.0.0",
+  "description": "an airbnb booking component",
   "author": "",
   "license": "",
   "engines": {
@@ -9,13 +9,16 @@
   },
   "scripts": {
     "db:seed": "node generate.js",
-    "start": "nodemon server"
+    "start": "nodemon server/index.js",
+    "react-dev": "webpack -d --watch",
+    "test": "jest"
   },
   "dependencies": {
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
+    "body-parser": "^1.18.3",
     "css-loader": "^1.0.0",
     "express": "^4.16.3",
     "mongoose": "^5.2.4",
