@@ -13,6 +13,13 @@
     "react-dev": "webpack -d --watch",
     "test": "jest --coverage --changedSince=master"
   },
+  "jest": {
+    "collectCoverage": true,
+    "verbose": true,
+    "collectCoverageFrom": [
+      "**/src/**/*.{js,jsx}"
+    ]
+  },
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.3",

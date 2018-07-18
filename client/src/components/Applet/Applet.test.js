@@ -1,5 +1,5 @@
 const Applet = require('./Applet');
 
-test('adds 1 + 2 to equal 3', () => {
+test('should true equal false', () => {
   expect(true).toBe(false);
 });
