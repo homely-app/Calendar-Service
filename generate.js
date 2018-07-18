@@ -1,5 +1,6 @@
 var db = require('./models/');
 const faker = require('faker');
+const mongoose = require('mongoose');
 
 class FakeDataGenerator {
   constructor() {
@@ -46,19 +47,30 @@ class FakeDataGenerator {
         max: 3
       });
 
+      // Shape of dataItem object
+      //     {
+      //       room_id: Number
+      //       numberOfBookings: Number
+      //       bookings:  Array [{checkIn: Date, duration: Number}]
+      //       price: Number
+      //       cleaningFee: Number
+      //       serviceFee: Number
+      //       minimumStay: Number
+      //   }
+
+      // store in local array
       this.data.push(dataItem);
+
+      // add to db
+      const Booking = mongoose.model('Booking', db.Booking);
+      const booking = new Booking(dataItem);
+      booking.save(function(err, booking) {
+        if (err) {
+          return console.error(err);
+        }
+      });
     }
 
-    // Shape of dataItem object
-    //   {
-    //     room_id: Number
-    //     numberOfBookings: Number
-    //     bookings:  Array [{checkIn: Date, duration: Number}]
-    //     price: Number
-    //     cleaningFee: Number
-    //     serviceFee: Number
-    //     minimumStay: Number
-    // }
     return this.data;
   }
 }

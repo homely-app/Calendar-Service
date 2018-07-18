@@ -28,4 +28,4 @@ process.on('SIGINT', function() {
   });
 });
 
-module.exports = {};
+module.exports = { Booking: require('./Booking') };
