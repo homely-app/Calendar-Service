@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
-var Schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
-var Booking = new Schema({
+const BookingSchema = new Schema({
   room_id: Number,
   numberOfBookings: Number,
   //   bookings: [{ checkIn: Date, duration: Number }],
@@ -12,5 +12,7 @@ var Booking = new Schema({
   serviceFee: Number,
   minimumStay: Number
 });
+
+const Booking = mongoose.model('Booking', BookingSchema);
 
 module.exports = Booking;

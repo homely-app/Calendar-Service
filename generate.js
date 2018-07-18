@@ -59,11 +59,11 @@ class FakeDataGenerator {
       //   }
 
       // store in local array
-      this.data.push(dataItem);
+      // this.data.push(dataItem);
 
       // add to db
-      const Booking = mongoose.model('Booking', db.Booking);
-      const booking = new Booking(dataItem);
+
+      const booking = new db.Booking(dataItem);
       booking.save(function(err, booking) {
         if (err) {
           return console.error(err);
@@ -75,6 +75,5 @@ class FakeDataGenerator {
   }
 }
 
-let myFactory = new FakeDataGenerator();
-let fakeData = myFactory.createData();
-console.log(fakeData);
+const myFactory = new FakeDataGenerator();
+myFactory.createData();
