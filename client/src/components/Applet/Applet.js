@@ -13,11 +13,16 @@ class Applet extends Component {
   }
 
   getData() {
-    let data = JSON.stringify({ data: 'hello world' });
-    const endpoint = '/repos';
-    this.postData(domain + port + endpoint, data)
-      .then(data => console.log(data)) // JSON from `response.json()` call
-      .catch(error => console.error(error));
+    console.log('getting data');
+    // let self = this;
+    const endpoint = '/bookings';
+    fetch(domain + port + endpoint)
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(myJson) {
+        console.log(myJson);
+      });
   }
 
   componentDidMount() {
