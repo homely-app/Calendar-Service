@@ -21,7 +21,7 @@ class Applet extends Component {
   render() {
     return (
       <h1>
-        Hello {this.state.hello} <FontAwesome name="rocket" size="2x" />
+        Hello world! <FontAwesome name="rocket" size="2x" />
       </h1>
     );
   }
