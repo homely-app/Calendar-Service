@@ -11,7 +11,7 @@
     "db:seed": "node generate.js",
     "start": "nodemon server/index.js",
     "react-dev": "webpack -d --watch",
-    "test": "jest --coverage --changedSince=master"
+    "test": "jest"
   },
   "jest": {
     "collectCoverage": true,
