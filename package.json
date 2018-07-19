@@ -16,8 +16,9 @@
   "jest": {
     "collectCoverage": true,
     "verbose": true,
-    "collectCoverageFrom": [
-      "**/src/**/*.{js,jsx}"
+    "testMatch": [
+      "**/client/src/components/**/*.test.{js,jsx}",
+      "**/__tests__/*.{js}"
     ]
   },
   "dependencies": {
