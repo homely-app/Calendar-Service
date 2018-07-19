@@ -10,7 +10,7 @@ class Applet extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      nick: 'world'
+      id: 1
     };
   }
 
@@ -21,7 +21,7 @@ class Applet extends Component {
   getData() {
     console.log('getting data');
     // let self = this;
-    const endpoint = '/bookings';
+    const endpoint = `/api/bookings/${this.state.id}`;
     fetch(domain + port + endpoint)
       .then(function(response) {
         return response.json();
@@ -32,7 +32,7 @@ class Applet extends Component {
   }
 
   componentDidMount() {
-    // this.getData();
+    this.getData();
   }
 
   render() {

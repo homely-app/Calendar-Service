@@ -1,12 +1,18 @@
-module.exports = {
-  get: function(REQ, RES) {
-    // your code here
-  }
-};
+const db = require('../models');
 
-// handleDatabaseRead = callback => {
-//   console.log("mongoose reads to me");
-//   db.read(data => {
-//     callback(data);
-//   });
-// };
+module.exports = {
+  get: (req, res, next) => {
+    db.Booking.find({})
+      .exec()
+      .then(data => {
+        if (!data) {
+          next();
+        } else {
+          res.json(data);
+        }
+      })
+      .catch(next);
+  },
+
+  create: function(req, res) {}
+};
