@@ -33,7 +33,7 @@ class Applet extends Component {
     return (
       <React.Fragment>
         <BookWrapper />
-        <AvailibilityWrapper />
+        <AvailabilityWrapper />
       </React.Fragment>
     );
   }

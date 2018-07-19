@@ -3,8 +3,8 @@ import './BookWrapper.css';
 
 class BookWrapper extends Component {
   // constructor(props){
-    // super();
-    // this.state = {};
+  // super();
+  // this.state = {};
   // }
 
   // componentWillMount(){}
@@ -17,9 +17,7 @@ class BookWrapper extends Component {
   // componentDidUpdate(){}
 
   render() {
-    return (
-      <div></div>
-    );
+    return <div />;
   }
 }
 
