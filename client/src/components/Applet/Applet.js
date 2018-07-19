@@ -31,9 +31,10 @@ class Applet extends Component {
 
   render() {
     return (
-      <h1>
-        Hello world! <FontAwesome name="rocket" size="2x" />
-      </h1>
+      <React.Fragment>
+        <BookWrapper />
+        <AvailibilityWrapper />
+      </React.Fragment>
     );
   }
 }
