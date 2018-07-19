@@ -1,3 +1,11 @@
 body {
-  background: red;
+  --main-bg-color: #fff;
+  --main-font-color: #4a4a4a;
+  --second-color: #ccd1cb;
+  --third-color: #ff2559;
+  --fourth-color: #007c87;
+
+  background-color: var(--main-bg-color);
+  color: var(--main-font-color);
+  font-family: Helvetica, sans-serif;
 }
