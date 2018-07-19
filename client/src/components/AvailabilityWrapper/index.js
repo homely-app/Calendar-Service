@@ -1,1 +1,1 @@
-export { default } from './AvailabilityWrapper.js'
+export { default } from './AvailabilityWrapper.js';

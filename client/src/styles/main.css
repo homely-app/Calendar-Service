@@ -8,4 +8,64 @@ body {
   background-color: var(--main-bg-color);
   color: var(--main-font-color);
   font-family: Helvetica, sans-serif;
+  padding: 2rem 2rem;
+}
+
+.container {
+  width: 30vmin;
+  border: 1px solid var(--second-color);
+  margin: 0 auto 2rem auto;
+  padding: 1rem 2rem 1rem 2rem;
+  text-align: center;
+}
+
+.price-container {
+  border-bottom: 1px solid var(--second-color);
+  text-align: left;
+}
+
+.price-pernight {
+  font-size: 0.85rem;
+}
+
+.book-container {
+  border-bottom: 1px solid var(--second-color);
+  padding-bottom: 1rem;
+}
+
+.sub-container {
+  border: 1px solid var(--second-color);
+  text-align: center;
+}
+
+#book-button {
+  font-family: Helvetica, sans-serif;
+  background: var(--third-color);
+  margin: 1rem auto;
+  /* border-radius: 10%; */
+  border: none;
+  outline: none;
+  color: var(--main-bg-color);
+  width: 80%;
+  height: 5vmin;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.availability_container {
+  height: 40vmin;
+  width: 80vmin;
+  border: 1px solid var(--second-color);
+  margin: 0 auto 2rem auto;
+}
+
+.disclaimer {
+  text-align: center;
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+.sub-title {
+  font-size: 0.85rem;
+  text-align: left;
 }

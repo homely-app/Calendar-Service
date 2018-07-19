@@ -1,1 +1,1 @@
-export { default } from './BookWrapper.js'
+export { default } from './BookWrapper.js';

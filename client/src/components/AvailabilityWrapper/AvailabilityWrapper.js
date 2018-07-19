@@ -1,25 +1,12 @@
 import React, { Component } from 'react';
-import './AvailabilityWrapper.css';
 
 class AvailabilityWrapper extends Component {
-  // constructor(props){
-    // super();
-    // this.state = {};
-  // }
-
-  // componentWillMount(){}
-  // componentDidMount(){}
-  // componentWillUnmount(){}
-
-  // componentWillReceiveProps(){}
-  // shouldComponentUpdate(){}
-  // componentWillUpdate(){}
-  // componentDidUpdate(){}
+  constructor(props) {
+    super(props);
+  }
 
   render() {
-    return (
-      <div></div>
-    );
+    return <div className="availability_container" />;
   }
 }
 

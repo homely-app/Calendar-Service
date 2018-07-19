@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import FontAwesome from 'react-fontawesome';
+// import FontAwesome from 'react-fontawesome';
+import BookWrapper from '../BookWrapper';
+import AvailabilityWrapper from '../AvailabilityWrapper';
 
 const domain = process.env.DOMAIN || 'https://localhost:';
 const port = process.env.PORT || '1128';
@@ -8,8 +10,12 @@ class Applet extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      hello: 'world'
+      nick: 'world'
     };
+  }
+
+  test() {
+    console.log('2ndtest');
   }
 
   getData() {
@@ -26,7 +32,7 @@ class Applet extends Component {
   }
 
   componentDidMount() {
-    this.getData();
+    // this.getData();
   }
 
   render() {
