@@ -1,4 +1,4 @@
-const Applet = require('./Applet');
+const AvailabilityWrapper = require('./AvailabilityWrapper');
 
 test('should false equal false', () => {
   expect(false).toBe(false);

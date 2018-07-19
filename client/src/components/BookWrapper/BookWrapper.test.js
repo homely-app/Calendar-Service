@@ -1,4 +1,4 @@
-const Applet = require('./Applet');
+const BookWrapper = require('./BookWrapper');
 
 test('should false equal false', () => {
   expect(false).toBe(false);
