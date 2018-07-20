@@ -14,15 +14,11 @@ class Applet extends Component {
     };
   }
 
-  test() {
-    console.log('2ndtest');
-  }
-
   getData() {
     console.log('getting data');
     // let self = this;
     const endpoint = `/api/bookings/${this.state.id}`;
-    fetch(domain + port + endpoint)
+    fetch(endpoint)
       .then(function(response) {
         return response.json();
       })
