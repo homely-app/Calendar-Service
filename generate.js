@@ -71,12 +71,23 @@ class FakeDataGenerator {
       // add to db
 
       const booking = new db.Booking(dataItem);
-      booking.save(function(err, booking) {
-        if (err) {
-          return console.error(err);
-        }
-      });
+      let temp = booking.save();
+      this.data.push(temp);
     }
+
+    // close connection to db
+    Promise.all(this.data)
+      .then(function(results) {
+        console.log(results.length + ' entrys saved in DataBase');
+      })
+      .catch(function(err) {
+        console.error(err);
+      })
+      .then(function() {
+        mongoose.connection.close(function() {
+          process.exit(0);
+        });
+      });
 
     return this.data;
   }
