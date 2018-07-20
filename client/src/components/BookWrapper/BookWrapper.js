@@ -7,6 +7,10 @@ class BookWrapper extends Component {
   }
 
   render() {
+    let containerPointerClass = this.props.isCheckOutDisplayed
+      ? 'checkin-calendar-container-pointer rotate'
+      : 'checkin-calendar-container-pointer';
+
     return (
       <React.Fragment>
         {this.props.roomData ? (
@@ -27,12 +31,6 @@ class BookWrapper extends Component {
                   >
                     Check-in
                   </h3>
-
-                  {this.props.isCheckInCalendarDisplayed ? (
-                    <div className="checkin-calendar-container">
-                      npm install calendar
-                    </div>
-                  ) : null}
                 </div>
                 <div className="book-arrow-container">
                   <h3 className="book-arrow">➞</h3>
@@ -44,13 +42,29 @@ class BookWrapper extends Component {
                   >
                     Check-out
                   </h3>
-                  {this.props.isCheckOutCalendarDisplayed ? (
-                    <div className="checkout-calendar-container">
-                      npm install calendar
-                    </div>
-                  ) : null}
                 </div>
               </div>
+              {this.props.isCalendarDisplayed ? (
+                <React.Fragment>
+                  <svg
+                    role="presentation"
+                    focusable="false"
+                    className={containerPointerClass}
+                  >
+                    <path
+                      className="checkin-calendar-container-pointer-edge"
+                      d="M0,20 40,20 20,0z"
+                    />
+                    <path
+                      className="checkin-calendar-container-pointer-edge"
+                      d="M0,20 20,0 40,20"
+                    />
+                  </svg>
+                  <div className="checkin-calendar-container">
+                    <div className="checkin-calendar">npm install calendar</div>
+                  </div>
+                </React.Fragment>
+              ) : null}
               <h3 className="sub-title">Guests</h3>
               <div className="guest-subcontainer">
                 <h3
@@ -60,7 +74,10 @@ class BookWrapper extends Component {
                   1 Guest
                 </h3>
               </div>
-              <PricingWrapper roomData={this.props.roomData} />
+              <PricingWrapper
+                roomData={this.props.roomData}
+                isPricingDisplayed={this.props.isPricingDisplayed}
+              />
               <button id="book-button" onClick={e => this.props.handleClick(e)}>
                 Book
               </button>
