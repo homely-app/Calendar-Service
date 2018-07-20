@@ -2,7 +2,8 @@ const db = require('../models');
 
 module.exports = {
   get: (req, res, next) => {
-    db.Booking.find({})
+    const roomId = req.params.id;
+    db.Booking.find({ roomId: roomId })
       .exec()
       .then(data => {
         if (!data || !data.length) {

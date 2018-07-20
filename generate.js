@@ -1,3 +1,6 @@
+// TODO:
+// Add max adults, children, infants
+
 var db = require('./models/');
 const faker = require('faker');
 const mongoose = require('mongoose');
@@ -49,9 +52,6 @@ class FakeDataGenerator {
         max: 3
       });
 
-      // Add max adults, children, infants
-      // Refactor bookings
-
       // Shape of dataItem object
       //     {
       //       room_id: Number
@@ -62,11 +62,6 @@ class FakeDataGenerator {
       //       serviceFee: Number
       //       minimumStay: Number
       //   }
-
-      // store in local array
-      // this.data.push(dataItem);
-
-      // add to db
 
       const booking = new db.Booking(dataItem);
       let temp = booking.save();
