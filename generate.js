@@ -17,6 +17,7 @@ class FakeDataGenerator {
       });
 
       dataItem.numberOfBookings = faker.random.number({
+        min: 1,
         max: 5
       });
 
@@ -30,7 +31,8 @@ class FakeDataGenerator {
           min: 1,
           max: 30
         });
-        dataItem.bookings.push(booking.checkIn, booking.duration);
+
+        dataItem.bookings.push(booking);
       }
 
       dataItem.serviceFee = faker.random.number({
@@ -46,6 +48,9 @@ class FakeDataGenerator {
       dataItem.minimumStay = faker.random.number({
         max: 3
       });
+
+      // Add max adults, children, infants
+      // Refactor bookings
 
       // Shape of dataItem object
       //     {
@@ -71,6 +76,7 @@ class FakeDataGenerator {
     // close connection to db
     Promise.all(this.data)
       .then(function(results) {
+        console.log('sample item', results[0].bookings[0]);
         console.log(results.length + ' entrys saved in DataBase');
       })
       .catch(function(err) {
