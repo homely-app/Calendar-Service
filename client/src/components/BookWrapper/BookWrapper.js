@@ -6,8 +6,18 @@ class BookWrapper extends Component {
   }
 
   render() {
+    // TODO: correct this function, add taxes
+    let totalBookingPrice;
+    if (this.props.roomData) {
+      totalBookingPrice =
+        this.props.roomData.price +
+        this.props.roomData.serviceFee +
+        this.props.roomData.cleaningFee +
+        this.props.roomData.cleaningFee;
+    }
+
     return (
-      <div>
+      <React.Fragment>
         {this.props.roomData ? (
           <div className="container">
             <div className="price-container">
@@ -28,14 +38,45 @@ class BookWrapper extends Component {
               </div>
               <h3 className="sub-title">Guests</h3>
               <div className="guest-subcontainer">
-                <h3> 3 Guest</h3>
+                <h3 className="guest-selector"> 1 Guest</h3>
+              </div>
+              <div className="pricing-container">
+                <div className="pricing-subcontainer">
+                  <p className="pricing-item">
+                    {' '}
+                    ${this.props.roomData.price} x 1 night
+                  </p>
+                  <p className="pricing-item">${this.props.roomData.price}</p>
+                </div>
+                <div className="pricing-subcontainer">
+                  <p className="pricing-item"> Service fee</p>
+                  <p className="pricing-item">
+                    ${this.props.roomData.serviceFee}
+                  </p>
+                </div>
+                <div className="pricing-subcontainer">
+                  <p className="pricing-item">Cleaning fee</p>
+                  <p className="pricing-item">
+                    ${this.props.roomData.cleaningFee}
+                  </p>
+                </div>
+                <div className="pricing-subcontainer">
+                  <p className="pricing-item"> Occupancy taxes and fees</p>
+                  <p className="pricing-item">
+                    ${this.props.roomData.cleaningFee}
+                  </p>
+                </div>
+                <div className="pricing-subcontainer">
+                  <p className="pricing-total"> Total</p>
+                  <p className="pricing-total">${totalBookingPrice}</p>
+                </div>
               </div>
               <button id="book-button">Book</button>
               <p className="disclaimer">You won’t be charged yet</p>
             </div>
           </div>
         ) : null}
-      </div>
+      </React.Fragment>
     );
   }
 }

@@ -1,5 +1,6 @@
 // TODO:
 // Add max adults, children, infants
+// Add occupancy fees and taxes
 
 var db = require('./models/');
 const faker = require('faker');
