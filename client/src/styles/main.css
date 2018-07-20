@@ -1,3 +1,114 @@
 body {
-  background: red;
+  --main-bg-color: #fff;
+  --main-font-color: #4a4a4a;
+  --second-color: #ccd1cb;
+  --third-color: #ff2559;
+  --fourth-color: #007c87;
+
+  background-color: var(--main-bg-color);
+  color: var(--main-font-color);
+  font-family: Helvetica, sans-serif;
+  padding: 2rem 2rem;
+  text-align: center;
+}
+
+.container {
+  display: inline-block;
+  width: 35vmin;
+  border: 1px solid var(--second-color);
+  margin: 0 auto 2rem auto;
+  padding: 2rem 2rem 2rem 2rem;
+  text-align: center;
+}
+
+.price-container {
+  border-bottom: 1px solid var(--second-color);
+  text-align: left;
+}
+
+.price-pernight {
+  font-size: 0.85rem;
+}
+
+.price {
+  margin: 0 0 1rem 0;
+}
+
+.book-container {
+  border-bottom: 1px solid var(--second-color);
+  padding-bottom: 1rem;
+}
+
+.guest-subcontainer {
+  border: 1px solid var(--second-color);
+  display: flex;
+}
+
+.book-subcontainer {
+  border: 1px solid var(--second-color);
+  display: flex;
+  justify-content: space-between;
+}
+
+#book-button {
+  font-family: Helvetica, sans-serif;
+  background: var(--third-color);
+  margin: 1rem auto;
+  /* border-radius: 10%; */
+  border: none;
+  outline: none;
+  color: var(--main-bg-color);
+  width: 80%;
+  height: 5vmin;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.book-checkin-container {
+  display: inline-block;
+  padding: 0.5rem;
+  margin-left: 1.5rem;
+}
+
+.book-checkout-container {
+  display: inline-block;
+  padding: 0.5rem;
+  margin-right: 1.5rem;
+}
+
+.book-checkout {
+  margin: 0;
+}
+
+.book-checkin {
+  margin: 0;
+}
+
+.availability_container {
+  display: inline-block;
+  border: 1px solid var(--second-color);
+  margin: 0 auto 2rem auto;
+  padding: 2rem 2rem 2rem 2rem;
+  text-align: left;
+}
+
+.disclaimer {
+  text-align: center;
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+.sub-title {
+  font-size: 0.85rem;
+  text-align: left;
+}
+
+.availability_title {
+  margin: 0 0 1rem 0;
+}
+
+.calendar_container {
+  width: 70vmin;
+  height: 30vmin;
+  border: 5px dotted red;
 }

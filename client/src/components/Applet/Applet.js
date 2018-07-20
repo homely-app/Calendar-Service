@@ -1,28 +1,49 @@
 import React, { Component } from 'react';
-import FontAwesome from 'react-fontawesome';
+// import FontAwesome from 'react-fontawesome';
+import BookWrapper from '../BookWrapper';
+import AvailabilityWrapper from '../AvailabilityWrapper';
 
 class Applet extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      hello: 'world'
+      roomId: null,
+      roomData: null
     };
   }
 
-  // componentWillMount(){}
-  // componentDidMount(){}
-  // componentWillUnmount(){}
+  getRoomId() {
+    let roomIdArray = window.location.pathname.split('/');
+    let roomId = roomIdArray[roomIdArray.length - 1];
+    this.setState({ roomId: roomId });
+    return roomId;
+  }
 
-  // componentWillReceiveProps(){}
-  // shouldComponentUpdate(){}
-  // componentWillUpdate(){}
-  // componentDidUpdate(){}
+  getData() {
+    let self = this;
+    let roomId = this.getRoomId();
+    console.log(roomId);
+    const endpoint = `/api/bookings/${roomId}`;
+    fetch(endpoint)
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(myJson) {
+        console.log(myJson);
+        self.setState({ roomData: myJson[0] });
+      });
+  }
+
+  componentDidMount() {
+    this.getData();
+  }
 
   render() {
     return (
-      <h1>
-        Hello world! <FontAwesome name="rocket" size="2x" />
-      </h1>
+      <React.Fragment>
+        <BookWrapper roomData={this.state.roomData} />
+        <AvailabilityWrapper roomData={this.state.roomData} />
+      </React.Fragment>
     );
   }
 }

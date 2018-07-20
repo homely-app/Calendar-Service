@@ -3,10 +3,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const BookingSchema = new Schema({
-  room_id: Number,
+  roomId: Number,
   numberOfBookings: Number,
-  //   bookings: [{ checkIn: Date, duration: Number }],
-  bookings: Array,
+  bookings: [{ checkIn: Date, duration: Number }],
   price: Number,
   cleaningFee: Number,
   serviceFee: Number,

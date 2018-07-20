@@ -1,3 +1,6 @@
+// TODO:
+// Add max adults, children, infants
+
 var db = require('./models/');
 const faker = require('faker');
 const mongoose = require('mongoose');
@@ -17,6 +20,7 @@ class FakeDataGenerator {
       });
 
       dataItem.numberOfBookings = faker.random.number({
+        min: 1,
         max: 5
       });
 
@@ -30,7 +34,8 @@ class FakeDataGenerator {
           min: 1,
           max: 30
         });
-        dataItem.bookings.push(booking.checkIn, booking.duration);
+
+        dataItem.bookings.push(booking);
       }
 
       dataItem.serviceFee = faker.random.number({
@@ -58,22 +63,35 @@ class FakeDataGenerator {
       //       minimumStay: Number
       //   }
 
-      // store in local array
-      // this.data.push(dataItem);
-
-      // add to db
-
       const booking = new db.Booking(dataItem);
-      booking.save(function(err, booking) {
-        if (err) {
-          return console.error(err);
-        }
-      });
+      let temp = booking.save();
+      this.data.push(temp);
     }
+
+    // close connection to db
+    Promise.all(this.data)
+      .then(function(results) {
+        console.log('sample item', results[0].bookings[0]);
+        console.log(results.length + ' entrys saved in DataBase');
+      })
+      .catch(function(err) {
+        console.error(err);
+      })
+      .then(function() {
+        mongoose.connection.close(function() {
+          process.exit(0);
+        });
+      });
 
     return this.data;
   }
 }
 
-const myFactory = new FakeDataGenerator();
-myFactory.createData();
+// flush db before seed
+db.Booking.remove({}).exec(function(err, results) {
+  if (err) {
+    console.log(err);
+  }
+  const myFactory = new FakeDataGenerator();
+  myFactory.createData();
+});
