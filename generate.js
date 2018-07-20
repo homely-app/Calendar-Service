@@ -53,6 +53,26 @@ class FakeDataGenerator {
         max: 3
       });
 
+      dataItem.maxAdults = faker.random.number({
+        min: 2,
+        max: 8
+      });
+
+      dataItem.maxChildren = faker.random.number({
+        min: 2,
+        max: 8
+      });
+
+      dataItem.maxInfants = faker.random.number({
+        min: 2,
+        max: 4
+      });
+
+      dataItem.taxes = faker.random.number({
+        min: 5,
+        max: 40
+      });
+
       // Shape of dataItem object
       //     {
       //       room_id: Number
@@ -62,6 +82,10 @@ class FakeDataGenerator {
       //       cleaningFee: Number
       //       serviceFee: Number
       //       minimumStay: Number
+      //       maxAdults: Number,
+      //       maxChildren: Number,
+      //       maxInfants: Number,
+      //       taxes: Number
       //   }
 
       const booking = new db.Booking(dataItem);
