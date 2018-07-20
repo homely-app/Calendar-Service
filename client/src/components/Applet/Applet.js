@@ -3,9 +3,6 @@ import React, { Component } from 'react';
 import BookWrapper from '../BookWrapper';
 import AvailabilityWrapper from '../AvailabilityWrapper';
 
-const domain = process.env.DOMAIN || 'https://localhost:';
-const port = process.env.PORT || '1128';
-
 class Applet extends Component {
   constructor(props) {
     super(props);

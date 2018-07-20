@@ -39,7 +39,12 @@ body {
   padding-bottom: 1rem;
 }
 
-.sub-container {
+.guest-subcontainer {
+  border: 1px solid var(--second-color);
+  display: flex;
+}
+
+.book-subcontainer {
   border: 1px solid var(--second-color);
   display: flex;
   justify-content: space-between;

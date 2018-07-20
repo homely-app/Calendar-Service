@@ -16,7 +16,7 @@ class BookWrapper extends Component {
         </div>
         <div className="book-container">
           <h3 className="sub-title">Dates</h3>
-          <div className="sub-container">
+          <div className="book-subcontainer">
             <div className="book-checkin-container">
               <h3 className="book-checkin">Check-in</h3>
             </div>
@@ -25,7 +25,7 @@ class BookWrapper extends Component {
             </div>
           </div>
           <h3 className="sub-title">Guests</h3>
-          <div className="sub-container">
+          <div className="guest-subcontainer">
             <h3> 3 Guest</h3>
           </div>
           <button id="book-button">Book</button>

@@ -5,7 +5,7 @@ module.exports = {
     db.Booking.find({})
       .exec()
       .then(data => {
-        if (!data) {
+        if (!data || !data.length) {
           next();
         } else {
           res.json(data);
