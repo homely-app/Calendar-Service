@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import FontAwesome from 'react-fontawesome';
 import BookWrapper from '../BookWrapper';
 import AvailabilityWrapper from '../AvailabilityWrapper';
 
@@ -10,6 +9,8 @@ class Applet extends Component {
       roomId: null,
       roomData: null
     };
+
+    this.handleClick = this.handleClick.bind(this);
   }
 
   getRoomId() {
@@ -34,6 +35,37 @@ class Applet extends Component {
       });
   }
 
+  handleClick(e) {
+    console.log('clicked', e.target.innerHTML);
+    if (e.target.innerHTML === 'Book') {
+      this.handleBookButtonClick();
+    } else if (
+      e.target.innerHTML === 'Check-in' ||
+      e.target.innerHTML === 'Check-out'
+    ) {
+      this.handleBookingClick(e.target.innerHTML);
+    } else if (e.target.innerHTML === '1 Guest') {
+      this.handleGuestNumberClick();
+    }
+  }
+
+  handleGuestNumberClick() {
+    console.log('handleGuestNumberClick');
+  }
+
+  handleBookButtonClick() {
+    console.log('handleBookButtonClick');
+  }
+
+  handleBookingClick(bookButton) {
+    console.log('handleBookingClick');
+    if (bookButton === 'Check-in') {
+      console.log(bookButton);
+    } else {
+      console.log(bookButton);
+    }
+  }
+
   componentDidMount() {
     this.getData();
   }
@@ -41,7 +73,10 @@ class Applet extends Component {
   render() {
     return (
       <React.Fragment>
-        <BookWrapper roomData={this.state.roomData} />
+        <BookWrapper
+          roomData={this.state.roomData}
+          handleClick={this.handleClick}
+        />
         <AvailabilityWrapper roomData={this.state.roomData} />
       </React.Fragment>
     );

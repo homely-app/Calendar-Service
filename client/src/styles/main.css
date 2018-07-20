@@ -17,7 +17,7 @@ body {
   width: 35vmin;
   border: 1px solid var(--second-color);
   margin: 0 auto 2rem auto;
-  padding: 2rem 2rem 2rem 2rem;
+  padding: 1.5rem 2rem 1rem 2rem;
   text-align: center;
 }
 
@@ -42,6 +42,13 @@ body {
 .guest-subcontainer {
   border: 1px solid var(--second-color);
   display: flex;
+  justify-content: space-between;
+}
+
+.guest-selector {
+  margin: 0 0 0 1.5rem;
+  font-weight: 400;
+  padding: 0.5rem;
 }
 
 .book-subcontainer {
@@ -50,11 +57,33 @@ body {
   justify-content: space-between;
 }
 
+.pricing-container {
+  margin-top: 1rem;
+}
+
+.pricing-subcontainer {
+  border-bottom: 1px solid var(--second-color);
+  display: flex;
+  justify-content: space-between;
+  padding: 0.85rem 0;
+}
+
+.pricing-item {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.pricing-total {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
 #book-button {
   font-family: Helvetica, sans-serif;
   background: var(--third-color);
   margin: 1rem auto;
-  /* border-radius: 10%; */
+  border-radius: 0.25rem;
   border: none;
   outline: none;
   color: var(--main-bg-color);
@@ -78,10 +107,25 @@ body {
 
 .book-checkout {
   margin: 0;
+  font-weight: 400;
+  opacity: 0.7;
 }
 
 .book-checkin {
   margin: 0;
+  font-weight: 400;
+  opacity: 0.7;
+}
+
+.book-arrow-container {
+  display: inline-block;
+  padding: 0.5rem;
+}
+
+.book-arrow {
+  margin: 0;
+  font-weight: 400;
+  opacity: 0.7;
 }
 
 .availability_container {
@@ -101,6 +145,31 @@ body {
 .sub-title {
   font-size: 0.85rem;
   text-align: left;
+}
+
+.book-funfact-container {
+  display: flex;
+}
+
+.book-funfact {
+  text-align: left;
+  padding: 1rem 0;
+}
+
+.book-funfact-title {
+  font-size: 0.85rem;
+  margin: 0 0 0.5rem 0;
+}
+
+.book-funfact-comment {
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.book-funfact-icon {
+  display: inline-block;
+  margin-top: 1rem;
+  margin-left: 2rem;
 }
 
 .availability_title {
