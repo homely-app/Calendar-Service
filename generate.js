@@ -2,6 +2,13 @@ var db = require('./models/');
 const faker = require('faker');
 const mongoose = require('mongoose');
 
+// flush db before seed
+db.Booking.remove({}).exec(function(err, results) {
+  if (err) {
+    console.log(err);
+  }
+});
+
 class FakeDataGenerator {
   constructor() {
     this.data = [];

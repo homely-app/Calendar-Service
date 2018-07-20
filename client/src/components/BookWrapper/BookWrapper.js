@@ -17,7 +17,12 @@ class BookWrapper extends Component {
         <div className="book-container">
           <h3 className="sub-title">Dates</h3>
           <div className="sub-container">
-            <h3>Check-in || Check-out</h3>
+            <div className="book-checkin-container">
+              <h3 className="book-checkin">Check-in</h3>
+            </div>
+            <div className="book-checkout-container">
+              <h3 className="book-checkout">Check-out</h3>
+            </div>
           </div>
           <h3 className="sub-title">Guests</h3>
           <div className="sub-container">
