@@ -33,6 +33,9 @@ class BookWrapper extends Component {
                 <div className="book-checkin-container">
                   <h3 className="book-checkin">Check-in</h3>
                 </div>
+                <div className="book-arrow-container">
+                  <h3 className="book-arrow">➞</h3>
+                </div>
                 <div className="book-checkout-container">
                   <h3 className="book-checkout">Check-out</h3>
                 </div>
@@ -80,7 +83,7 @@ class BookWrapper extends Component {
                   This home is on people’s minds.
                 </h3>
                 <p className="book-funfact-comment">
-                  It’s been viewed 500+ times in the past week.
+                  It’s been viewed 50,000+ times in the past week.
                 </p>
               </div>
               <FontAwesome

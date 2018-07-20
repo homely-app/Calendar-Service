@@ -17,7 +17,7 @@ body {
   width: 35vmin;
   border: 1px solid var(--second-color);
   margin: 0 auto 2rem auto;
-  padding: 2rem 2rem 2rem 2rem;
+  padding: 1.5rem 2rem 1rem 2rem;
   text-align: center;
 }
 
@@ -112,6 +112,17 @@ body {
 }
 
 .book-checkin {
+  margin: 0;
+  font-weight: 400;
+  opacity: 0.7;
+}
+
+.book-arrow-container {
+  display: inline-block;
+  padding: 0.5rem;
+}
+
+.book-arrow {
   margin: 0;
   font-weight: 400;
   opacity: 0.7;
