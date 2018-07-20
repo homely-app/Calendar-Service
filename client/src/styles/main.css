@@ -108,11 +108,13 @@ body {
 .book-checkout {
   margin: 0;
   font-weight: 400;
+  opacity: 0.7;
 }
 
 .book-checkin {
   margin: 0;
   font-weight: 400;
+  opacity: 0.7;
 }
 
 .availability_container {
@@ -132,6 +134,31 @@ body {
 .sub-title {
   font-size: 0.85rem;
   text-align: left;
+}
+
+.book-funfact-container {
+  display: flex;
+}
+
+.book-funfact {
+  text-align: left;
+  padding: 1rem 0;
+}
+
+.book-funfact-title {
+  font-size: 0.85rem;
+  margin: 0 0 0.5rem 0;
+}
+
+.book-funfact-comment {
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.book-funfact-icon {
+  display: inline-block;
+  margin-top: 1rem;
+  margin-left: 2rem;
 }
 
 .availability_title {

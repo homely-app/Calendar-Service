@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import FontAwesome from 'react-fontawesome';
 import BookWrapper from '../BookWrapper';
 import AvailabilityWrapper from '../AvailabilityWrapper';
 

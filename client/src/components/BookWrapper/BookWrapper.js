@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import FontAwesome from 'react-fontawesome';
 
 class BookWrapper extends Component {
   constructor(props) {
@@ -43,7 +44,6 @@ class BookWrapper extends Component {
               <div className="pricing-container">
                 <div className="pricing-subcontainer">
                   <p className="pricing-item">
-                    {' '}
                     ${this.props.roomData.price} x 1 night
                   </p>
                   <p className="pricing-item">${this.props.roomData.price}</p>
@@ -73,6 +73,21 @@ class BookWrapper extends Component {
               </div>
               <button id="book-button">Book</button>
               <p className="disclaimer">You won’t be charged yet</p>
+            </div>
+            <div className="book-funfact-container">
+              <div className="book-funfact">
+                <h3 className="book-funfact-title">
+                  This home is on people’s minds.
+                </h3>
+                <p className="book-funfact-comment">
+                  It’s been viewed 500+ times in the past week.
+                </p>
+              </div>
+              <FontAwesome
+                className="book-funfact-icon"
+                name="lightbulb-o"
+                size="2x"
+              />
             </div>
           </div>
         ) : null}
