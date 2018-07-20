@@ -31,18 +31,33 @@ class BookWrapper extends Component {
               <h3 className="sub-title">Dates</h3>
               <div className="book-subcontainer">
                 <div className="book-checkin-container">
-                  <h3 className="book-checkin">Check-in</h3>
+                  <h3
+                    className="book-checkin"
+                    onClick={e => this.props.handleClick(e)}
+                  >
+                    Check-in
+                  </h3>
                 </div>
                 <div className="book-arrow-container">
                   <h3 className="book-arrow">➞</h3>
                 </div>
                 <div className="book-checkout-container">
-                  <h3 className="book-checkout">Check-out</h3>
+                  <h3
+                    className="book-checkout"
+                    onClick={e => this.props.handleClick(e)}
+                  >
+                    Check-out
+                  </h3>
                 </div>
               </div>
               <h3 className="sub-title">Guests</h3>
               <div className="guest-subcontainer">
-                <h3 className="guest-selector"> 1 Guest</h3>
+                <h3
+                  className="guest-selector"
+                  onClick={e => this.props.handleClick(e)}
+                >
+                  1 Guest
+                </h3>
               </div>
               <div className="pricing-container">
                 <div className="pricing-subcontainer">
@@ -74,16 +89,18 @@ class BookWrapper extends Component {
                   <p className="pricing-total">${totalBookingPrice}</p>
                 </div>
               </div>
-              <button id="book-button">Book</button>
+              <button id="book-button" onClick={e => this.props.handleClick(e)}>
+                Book
+              </button>
               <p className="disclaimer">You won’t be charged yet</p>
             </div>
             <div className="book-funfact-container">
               <div className="book-funfact">
                 <h3 className="book-funfact-title">
-                  This home is on people’s minds.
+                  This home is a former meth lab.
                 </h3>
                 <p className="book-funfact-comment">
-                  It’s been viewed 50,000+ times in the past week.
+                  It’s been raided 50+ times in the past month.
                 </p>
               </div>
               <FontAwesome
