@@ -7,20 +7,30 @@ class Applet extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: 1
+      roomId: null,
+      roomData: null
     };
   }
 
+  getRoomId() {
+    let roomIdArray = window.location.pathname.split('/');
+    let roomId = roomIdArray[roomIdArray.length - 1];
+    this.setState({ roomId: roomId });
+    return roomId;
+  }
+
   getData() {
-    console.log('getting data');
-    // let self = this;
-    const endpoint = `/api/bookings/${this.state.id}`;
+    let self = this;
+    let roomId = this.getRoomId();
+    console.log(roomId);
+    const endpoint = `/api/bookings/${roomId}`;
     fetch(endpoint)
       .then(function(response) {
         return response.json();
       })
       .then(function(myJson) {
         console.log(myJson);
+        self.setState({ roomData: myJson[0] });
       });
   }
 
@@ -31,8 +41,8 @@ class Applet extends Component {
   render() {
     return (
       <React.Fragment>
-        <BookWrapper />
-        <AvailabilityWrapper />
+        <BookWrapper roomData={this.state.roomData} />
+        <AvailabilityWrapper roomData={this.state.roomData} />
       </React.Fragment>
     );
   }
