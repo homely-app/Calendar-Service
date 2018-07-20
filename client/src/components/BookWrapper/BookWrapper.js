@@ -7,14 +7,14 @@ class BookWrapper extends Component {
   }
 
   render() {
-    // TODO: correct this function, add taxes
+    // TODO: correct this function
     let totalBookingPrice;
     if (this.props.roomData) {
       totalBookingPrice =
         this.props.roomData.price +
         this.props.roomData.serviceFee +
         this.props.roomData.cleaningFee +
-        this.props.roomData.cleaningFee;
+        this.props.roomData.taxes;
     }
 
     return (
@@ -91,9 +91,7 @@ class BookWrapper extends Component {
                 </div>
                 <div className="pricing-subcontainer">
                   <p className="pricing-item"> Occupancy taxes and fees</p>
-                  <p className="pricing-item">
-                    ${this.props.roomData.cleaningFee}
-                  </p>
+                  <p className="pricing-item">${this.props.roomData.taxes}</p>
                 </div>
                 <div className="pricing-subcontainer">
                   <p className="pricing-total"> Total</p>
