@@ -37,6 +37,12 @@ class BookWrapper extends Component {
                   >
                     Check-in
                   </h3>
+
+                  {this.props.isCheckInCalendarDisplayed ? (
+                    <div className="checkin-calendar-container">
+                      npm install calendar
+                    </div>
+                  ) : null}
                 </div>
                 <div className="book-arrow-container">
                   <h3 className="book-arrow">➞</h3>
@@ -48,6 +54,11 @@ class BookWrapper extends Component {
                   >
                     Check-out
                   </h3>
+                  {this.props.isCheckOutCalendarDisplayed ? (
+                    <div className="checkout-calendar-container">
+                      npm install calendar
+                    </div>
+                  ) : null}
                 </div>
               </div>
               <h3 className="sub-title">Guests</h3>
