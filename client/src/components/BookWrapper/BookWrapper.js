@@ -52,11 +52,11 @@ class BookWrapper extends Component {
                     className={containerPointerClass}
                   >
                     <path
-                      className="checkin-calendar-container-pointer-edge"
+                      className="checkin-calendar-container-pointer-edge1"
                       d="M0,20 40,20 20,0z"
                     />
                     <path
-                      className="checkin-calendar-container-pointer-edge"
+                      className="checkin-calendar-container-pointer-edge2"
                       d="M0,20 20,0 40,20"
                     />
                   </svg>
