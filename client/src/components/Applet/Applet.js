@@ -7,7 +7,12 @@ class Applet extends Component {
     super(props);
     this.state = {
       roomId: null,
-      roomData: null
+      roomData: null,
+      isCalendarDisplayed: false,
+      isCheckInDisplayed: false,
+      isCheckOutDisplayed: false,
+      isPricingDisplayed: false,
+      isValidBooking: false
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -23,20 +28,17 @@ class Applet extends Component {
   getData() {
     let self = this;
     let roomId = this.getRoomId();
-    console.log(roomId);
     const endpoint = `/api/bookings/${roomId}`;
     fetch(endpoint)
       .then(function(response) {
         return response.json();
       })
       .then(function(myJson) {
-        console.log(myJson);
         self.setState({ roomData: myJson[0] });
       });
   }
 
   handleClick(e) {
-    console.log('clicked', e.target.innerHTML);
     if (e.target.innerHTML === 'Book') {
       this.handleBookButtonClick();
     } else if (
@@ -54,16 +56,32 @@ class Applet extends Component {
   }
 
   handleBookButtonClick() {
-    console.log('handleBookButtonClick');
+    alert('booked!');
   }
 
   handleBookingClick(bookButton) {
-    console.log('handleBookingClick');
     if (bookButton === 'Check-in') {
-      console.log(bookButton);
-    } else {
-      console.log(bookButton);
+      if (this.state.isCheckOutDisplayed) {
+        this.setState({ isCheckInDisplayed: true });
+      } else {
+        this.toggleCalendar();
+      }
+      this.setState({ isCheckInDisplayed: true });
+      this.setState({ isCheckOutDisplayed: false });
+    } else if (bookButton === 'Check-out') {
+      if (this.state.isCheckInDisplayed) {
+        this.setState({ isCheckOutDisplayed: true });
+      } else {
+        this.toggleCalendar();
+      }
+      this.setState({ isCheckInDisplayed: false });
+      this.setState({ isCheckOutDisplayed: true });
     }
+  }
+
+  toggleCalendar() {
+    let currentState = this.state.isCalendarDisplayed;
+    this.setState({ isCalendarDisplayed: !currentState });
   }
 
   componentDidMount() {
@@ -75,6 +93,10 @@ class Applet extends Component {
       <React.Fragment>
         <BookWrapper
           roomData={this.state.roomData}
+          isCalendarDisplayed={this.state.isCalendarDisplayed}
+          isCheckInDisplayed={this.state.isCheckInDisplayed}
+          isCheckOutDisplayed={this.state.isCheckOutDisplayed}
+          isPricingDisplayed={this.state.isPricingDisplayed}
           handleClick={this.handleClick}
         />
         <AvailabilityWrapper roomData={this.state.roomData} />

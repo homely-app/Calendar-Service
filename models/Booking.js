@@ -9,7 +9,11 @@ const BookingSchema = new Schema({
   price: Number,
   cleaningFee: Number,
   serviceFee: Number,
-  minimumStay: Number
+  minimumStay: Number,
+  maxAdults: Number,
+  maxChildren: Number,
+  maxInfants: Number,
+  taxes: Number
 });
 
 const Booking = mongoose.model('Booking', BookingSchema);

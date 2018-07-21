@@ -1,21 +1,15 @@
 import React, { Component } from 'react';
 import FontAwesome from 'react-fontawesome';
-
+import PricingWrapper from '../PricingWrapper';
 class BookWrapper extends Component {
   constructor(props) {
     super(props);
   }
 
   render() {
-    // TODO: correct this function, add taxes
-    let totalBookingPrice;
-    if (this.props.roomData) {
-      totalBookingPrice =
-        this.props.roomData.price +
-        this.props.roomData.serviceFee +
-        this.props.roomData.cleaningFee +
-        this.props.roomData.cleaningFee;
-    }
+    let containerPointerClass = this.props.isCheckOutDisplayed
+      ? 'checkin-calendar-container-pointer rotate'
+      : 'checkin-calendar-container-pointer';
 
     return (
       <React.Fragment>
@@ -50,6 +44,27 @@ class BookWrapper extends Component {
                   </h3>
                 </div>
               </div>
+              {this.props.isCalendarDisplayed ? (
+                <React.Fragment>
+                  <svg
+                    role="presentation"
+                    focusable="false"
+                    className={containerPointerClass}
+                  >
+                    <path
+                      className="checkin-calendar-container-pointer-edge1"
+                      d="M0,20 40,20 20,0z"
+                    />
+                    <path
+                      className="checkin-calendar-container-pointer-edge2"
+                      d="M0,20 20,0 40,20"
+                    />
+                  </svg>
+                  <div className="checkin-calendar-container">
+                    <div className="checkin-calendar">npm install calendar</div>
+                  </div>
+                </React.Fragment>
+              ) : null}
               <h3 className="sub-title">Guests</h3>
               <div className="guest-subcontainer">
                 <h3
@@ -59,36 +74,10 @@ class BookWrapper extends Component {
                   1 Guest
                 </h3>
               </div>
-              <div className="pricing-container">
-                <div className="pricing-subcontainer">
-                  <p className="pricing-item">
-                    ${this.props.roomData.price} x 1 night
-                  </p>
-                  <p className="pricing-item">${this.props.roomData.price}</p>
-                </div>
-                <div className="pricing-subcontainer">
-                  <p className="pricing-item"> Service fee</p>
-                  <p className="pricing-item">
-                    ${this.props.roomData.serviceFee}
-                  </p>
-                </div>
-                <div className="pricing-subcontainer">
-                  <p className="pricing-item">Cleaning fee</p>
-                  <p className="pricing-item">
-                    ${this.props.roomData.cleaningFee}
-                  </p>
-                </div>
-                <div className="pricing-subcontainer">
-                  <p className="pricing-item"> Occupancy taxes and fees</p>
-                  <p className="pricing-item">
-                    ${this.props.roomData.cleaningFee}
-                  </p>
-                </div>
-                <div className="pricing-subcontainer">
-                  <p className="pricing-total"> Total</p>
-                  <p className="pricing-total">${totalBookingPrice}</p>
-                </div>
-              </div>
+              <PricingWrapper
+                roomData={this.props.roomData}
+                isPricingDisplayed={this.props.isPricingDisplayed}
+              />
               <button id="book-button" onClick={e => this.props.handleClick(e)}>
                 Book
               </button>
@@ -97,10 +86,10 @@ class BookWrapper extends Component {
             <div className="book-funfact-container">
               <div className="book-funfact">
                 <h3 className="book-funfact-title">
-                  This home is a former meth lab.
+                  {this.props.roomData.funFactTitles}
                 </h3>
                 <p className="book-funfact-comment">
-                  It’s been raided 50+ times in the past month.
+                  {this.props.roomData.funFacts}
                 </p>
               </div>
               <FontAwesome

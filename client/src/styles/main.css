@@ -99,6 +99,36 @@ body {
   margin-left: 1.5rem;
 }
 
+.checkin-calendar-container {
+  position: absolute;
+  z-index: 100;
+  display: block;
+  top: 21vmin;
+  right: 45vmin;
+  width: 30vmin;
+  height: 28vmin;
+  border: 1px solid var(--second-color);
+  margin: 0 auto 2rem auto;
+  padding: 1.5rem 2rem 1rem 2rem;
+  text-align: center;
+  background: var(--main-bg-color);
+}
+
+.checkout-calendar-container {
+  position: absolute;
+  z-index: 100;
+  display: block;
+  top: 21vmin;
+  right: 45vmin;
+  width: 30vmin;
+  height: 28vmin;
+  border: 1px solid var(--second-color);
+  margin: 0 auto 2rem auto;
+  padding: 1.5rem 2rem 1rem 2rem;
+  text-align: center;
+  background: var(--main-bg-color);
+}
+
 .book-checkout-container {
   display: inline-block;
   padding: 0.5rem;
