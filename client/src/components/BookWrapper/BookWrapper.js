@@ -86,10 +86,10 @@ class BookWrapper extends Component {
             <div className="book-funfact-container">
               <div className="book-funfact">
                 <h3 className="book-funfact-title">
-                  This home is a former meth lab.
+                  {this.props.roomData.funFactTitles}
                 </h3>
                 <p className="book-funfact-comment">
-                  It’s been raided 50+ times in the past month.
+                  {this.props.roomData.funFacts}
                 </p>
               </div>
               <FontAwesome
