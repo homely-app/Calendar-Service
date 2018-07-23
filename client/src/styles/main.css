@@ -14,7 +14,7 @@ body {
 
 .container {
   display: inline-block;
-  width: 35vmin;
+  width: 25rem;
   border: 1px solid var(--second-color);
   margin: 0 auto 2rem auto;
   padding: 1.5rem 2rem 1rem 2rem;
@@ -53,6 +53,7 @@ body {
 
 .book-subcontainer {
   border: 1px solid var(--second-color);
+  /* margin-bottom: 1rem; */
   display: flex;
   justify-content: space-between;
 }
@@ -82,13 +83,13 @@ body {
 #book-button {
   font-family: Helvetica, sans-serif;
   background: var(--third-color);
-  margin: 1rem auto;
+  color: var(--main-bg-color);
+  margin: 1.5rem auto 1rem auto;
   border-radius: 0.25rem;
   border: none;
   outline: none;
-  color: var(--main-bg-color);
-  width: 80%;
-  height: 5vmin;
+  width: 100%;
+  height: 2.5rem;
   font-size: 1rem;
   font-weight: bold;
 }
@@ -103,10 +104,9 @@ body {
   position: absolute;
   z-index: 100;
   display: block;
-  top: 21vmin;
-  right: 45vmin;
-  width: 30vmin;
-  height: 28vmin;
+  /* width: 25%; */
+  min-width: 21rem;
+  height: 13rem;
   border: 1px solid var(--second-color);
   margin: 0 auto 2rem auto;
   padding: 1.5rem 2rem 1rem 2rem;
@@ -114,19 +114,32 @@ body {
   background: var(--main-bg-color);
 }
 
-.checkout-calendar-container {
-  position: absolute;
-  z-index: 100;
+.checkin-calendar-container-pointer {
+  position: relative;
+  z-index: 1000;
   display: block;
-  top: 21vmin;
-  right: 45vmin;
-  width: 30vmin;
-  height: 28vmin;
-  border: 1px solid var(--second-color);
-  margin: 0 auto 2rem auto;
-  padding: 1.5rem 2rem 1rem 2rem;
-  text-align: center;
-  background: var(--main-bg-color);
+  height: 1.25rem;
+  margin: 0px 3rem -1px 3rem;
+}
+
+.rotate {
+  transform: scale(-1, 1);
+}
+
+.checkin-calendar-container-pointer-edge1 {
+  fill: var(--main-bg-color);
+  position: relative;
+}
+
+.checkin-calendar-container-pointer-edge2 {
+  fill: transparent;
+  stroke: var(--second-color);
+  position: relative;
+}
+
+.checkin-calendar {
+  border: 5px dotted red;
+  min-height: 10rem;
 }
 
 .book-checkout-container {
@@ -211,3 +224,8 @@ body {
   height: 30vmin;
   border: 5px dotted red;
 }
+
+/* path {
+  color: var(--main-font-color);
+  background: var(--main-bg-color);
+} */
