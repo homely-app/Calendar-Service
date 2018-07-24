@@ -52,7 +52,11 @@ class BookWrapper extends Component {
                     />
                   </svg>
                   <div className="checkin-calendar-container">
-                    <Calendar />
+                    <Calendar
+                      renderHeader={this.props.renderHeader}
+                      renderDays={this.props.renderDays}
+                      renderCells={this.props.renderCells}
+                    />
                   </div>
                 </React.Fragment>
               ) : null}

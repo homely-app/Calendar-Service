@@ -285,11 +285,13 @@ body {
 }
 
 .calendar .calendar-body .cell:hover {
-  transition: 0.5s ease-out;
+  background: #80f4e6;
+  color: #00ad99;
 }
 
 .calendar .calendar-body .selected {
-  background: lightblue;
+  background: #00ad99;
+  color: var(--main-bg-color);
 }
 
 .calendar .calendar-body .row:last-child {
