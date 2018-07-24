@@ -30,9 +30,17 @@ class Applet extends Component {
   }
 
   onDateClick(day) {
-    this.setState({
-      bookingStart: day
-    });
+    if (!this.state.bookingStart) {
+      this.setState({
+        bookingStart: day
+      });
+    }
+
+    if (this.state.bookingStart) {
+      this.setState({
+        bookingEnd: day
+      });
+    }
   }
 
   nextMonth() {
@@ -85,7 +93,7 @@ class Applet extends Component {
   }
 
   renderCells() {
-    const { currentMonth, bookingStart } = this.state;
+    const { currentMonth, bookingStart, bookingEnd } = this.state;
     const monthStart = dateFns.startOfMonth(currentMonth);
     const monthEnd = dateFns.endOfMonth(monthStart);
     const startDate = dateFns.startOfWeek(monthStart);
@@ -96,19 +104,36 @@ class Applet extends Component {
     let days = [];
     let day = startDate;
     let formattedDate = '';
+    let disabled = 'disabled';
+    let start = 'booking-start';
+    let booking = 'booking';
+    let end = 'booking-end';
+
     while (day <= endDate) {
+      let cellClass;
       for (let i = 0; i < 7; i++) {
         formattedDate = dateFns.format(day, dateFormat);
         const cloneDay = day;
+
+        if (!dateFns.isSameMonth(day, monthStart)) {
+          cellClass = `col cell ${disabled}`;
+        } else if (dateFns.isSameDay(day, bookingStart)) {
+          cellClass = `col cell ${start}`;
+        } else if (dateFns.isSameDay(day, bookingEnd)) {
+          cellClass = `col cell ${end}`;
+        } else if (
+          bookingStart &&
+          bookingEnd &&
+          dateFns.isWithinRange(day, bookingStart, bookingEnd)
+        ) {
+          cellClass = `col cell ${booking}`;
+        } else {
+          cellClass = 'col cell';
+        }
+
         days.push(
           <div
-            className={`col cell ${
-              !dateFns.isSameMonth(day, monthStart)
-                ? 'disabled'
-                : dateFns.isSameDay(day, bookingStart)
-                  ? 'selected'
-                  : ''
-            }`}
+            className={cellClass}
             key={day}
             onClick={() => this.onDateClick(dateFns.parse(cloneDay))}
           >
