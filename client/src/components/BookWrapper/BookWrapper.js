@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import FontAwesome from 'react-fontawesome';
 import PricingWrapper from '../PricingWrapper';
+import Calendar from '../Calendar';
 class BookWrapper extends Component {
   constructor(props) {
     super(props);
@@ -25,23 +26,13 @@ class BookWrapper extends Component {
               <h3 className="sub-title">Dates</h3>
               <div className="book-subcontainer">
                 <div className="book-checkin-container">
-                  <h3
-                    className="book-checkin"
-                    onClick={e => this.props.handleClick(e)}
-                  >
-                    Check-in
-                  </h3>
+                  <h3 className="book-checkin">Check-in</h3>
                 </div>
                 <div className="book-arrow-container">
                   <h3 className="book-arrow">➞</h3>
                 </div>
                 <div className="book-checkout-container">
-                  <h3
-                    className="book-checkout"
-                    onClick={e => this.props.handleClick(e)}
-                  >
-                    Check-out
-                  </h3>
+                  <h3 className="book-checkout">Check-out</h3>
                 </div>
               </div>
               {this.props.isCalendarDisplayed ? (
@@ -61,26 +52,19 @@ class BookWrapper extends Component {
                     />
                   </svg>
                   <div className="checkin-calendar-container">
-                    <div className="checkin-calendar">npm install calendar</div>
+                    <Calendar />
                   </div>
                 </React.Fragment>
               ) : null}
               <h3 className="sub-title">Guests</h3>
               <div className="guest-subcontainer">
-                <h3
-                  className="guest-selector"
-                  onClick={e => this.props.handleClick(e)}
-                >
-                  1 Guest
-                </h3>
+                <h3 className="guest-selector">1 Guest</h3>
               </div>
               <PricingWrapper
                 roomData={this.props.roomData}
                 isPricingDisplayed={this.props.isPricingDisplayed}
               />
-              <button id="book-button" onClick={e => this.props.handleClick(e)}>
-                Book
-              </button>
+              <button id="book-button">Book</button>
               <p className="disclaimer">You won’t be charged yet</p>
             </div>
             <div className="book-funfact-container">

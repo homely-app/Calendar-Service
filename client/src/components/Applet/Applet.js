@@ -49,6 +49,13 @@ class Applet extends Component {
     } else if (e.target.innerHTML === '1 Guest') {
       this.handleGuestNumberClick();
     }
+    if (e.target.id === 'root') {
+      this.setState({
+        isCheckOutDisplayed: false,
+        isCheckInDisplayed: false,
+        isCalendarDisplayed: false
+      });
+    }
   }
 
   handleGuestNumberClick() {
@@ -86,6 +93,7 @@ class Applet extends Component {
 
   componentDidMount() {
     this.getData();
+    document.body.addEventListener('click', this.handleClick);
   }
 
   render() {
@@ -97,7 +105,6 @@ class Applet extends Component {
           isCheckInDisplayed={this.state.isCheckInDisplayed}
           isCheckOutDisplayed={this.state.isCheckOutDisplayed}
           isPricingDisplayed={this.state.isPricingDisplayed}
-          handleClick={this.handleClick}
         />
         <AvailabilityWrapper roomData={this.state.roomData} />
       </React.Fragment>
