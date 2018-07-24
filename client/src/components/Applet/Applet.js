@@ -108,6 +108,18 @@ class Applet extends Component {
     let start = 'booking-start';
     let booking = 'booking';
     let end = 'booking-end';
+    let existingBookings = this.state.roomData.bookings;
+    let bookedDates = [];
+
+    for (let i = 0; i < existingBookings.length; i++) {
+      let duration = existingBookings[i].duration;
+      bookedDates.push(new Date(existingBookings[i].checkIn));
+      for (let j = 1; j < duration + 0; j++) {
+        bookedDates.push(
+          dateFns.addDays(new Date(existingBookings[i].checkIn), j)
+        );
+      }
+    }
 
     while (day <= endDate) {
       let cellClass;
@@ -115,9 +127,7 @@ class Applet extends Component {
         formattedDate = dateFns.format(day, dateFormat);
         const cloneDay = day;
 
-        if (!dateFns.isSameMonth(day, monthStart)) {
-          cellClass = `col cell ${disabled}`;
-        } else if (dateFns.isSameDay(day, bookingStart)) {
+        if (dateFns.isSameDay(day, bookingStart)) {
           cellClass = `col cell ${start}`;
         } else if (dateFns.isSameDay(day, bookingEnd)) {
           cellClass = `col cell ${end}`;
@@ -129,6 +139,16 @@ class Applet extends Component {
           cellClass = `col cell ${booking}`;
         } else {
           cellClass = 'col cell';
+        }
+
+        for (let i = 0; i < bookedDates.length; i++) {
+          if (dateFns.isSameDay(day, bookedDates[i])) {
+            cellClass = 'col cell booked';
+          }
+        }
+
+        if (!dateFns.isSameMonth(day, monthStart)) {
+          cellClass = `col cell ${disabled}`;
         }
 
         days.push(

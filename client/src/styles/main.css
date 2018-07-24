@@ -309,6 +309,11 @@ body {
   color: var(--main-bg-color);
 }
 
+.calendar .calendar-body .booked {
+  text-decoration: line-through;
+  opacity: 0.4;
+}
+
 .calendar .calendar-body .row:last-child {
   border-bottom: none;
 }
