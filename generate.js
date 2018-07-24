@@ -73,9 +73,35 @@ class FakeDataGenerator {
         max: 40
       });
 
+      let num1 = faker.random.number({
+        max: 5
+      });
+
+      let num2 = faker.random.number({
+        max: 5
+      });
+
+      const funFactTitles = [
+        'This home is a former meth lab.',
+        'This house is haunted.',
+        'Someone died here last year.',
+        'Don\'t book this place...please.',
+        'This owner takes pictures of all tenants.'
+      ];
+      const funFacts = [
+        'It’s been raided 50+ times in the past month.',
+        'It’s been condemned twice in the past month.',
+        'It’s been viewed 50,000+ times in the past week.',
+        'It’s been desecrated 25+ times in the past month.',
+        'It’s been defiled 100+ times in the past month.'
+      ];
+
+      dataItem.funFactTitles = funFactTitles[num1];
+      dataItem.funFacts = funFacts[num2];
+
       // Shape of dataItem object
       //     {
-      //       room_id: Number
+      //       roomId: Number
       //       numberOfBookings: Number
       //       bookings:  Array [{checkIn: Date, duration: Number}]
       //       price: Number
