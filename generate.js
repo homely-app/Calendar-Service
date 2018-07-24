@@ -22,7 +22,7 @@ class FakeDataGenerator {
 
       dataItem.numberOfBookings = faker.random.number({
         min: 1,
-        max: 5
+        max: 30
       });
 
       dataItem.bookings = [];
@@ -30,10 +30,10 @@ class FakeDataGenerator {
       // TODO - refine date generation algo to not produce overlapping bookings
       for (let i = 0; i < dataItem.numberOfBookings; i++) {
         let booking = {};
-        booking.checkIn = faker.date.between('2018-07-30', '2019-12-31');
+        booking.checkIn = faker.date.between('2018-07-24', '2019-12-31');
         booking.duration = faker.random.number({
           min: 1,
-          max: 30
+          max: 31
         });
 
         dataItem.bookings.push(booking);
