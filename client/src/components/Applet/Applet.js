@@ -18,6 +18,7 @@ class Applet extends Component {
       currentMonth: new Date(),
       bookingStart: null,
       bookingEnd: null,
+      bookingDuration: 1,
       checkInTitle: 'Check-in',
       checkOutTitle: 'Check-out'
     };
@@ -41,9 +42,14 @@ class Applet extends Component {
     }
 
     if (this.state.bookingStart) {
+      let duration = dateFns.differenceInCalendarDays(
+        day,
+        this.state.bookingStart
+      );
       this.setState({
         bookingEnd: day,
-        checkOutTitle: formattedDate
+        checkOutTitle: formattedDate,
+        bookingDuration: duration
       });
     }
   }
@@ -279,6 +285,7 @@ class Applet extends Component {
           renderCells={this.renderCells}
           checkInTitle={this.state.checkInTitle}
           checkOutTitle={this.state.checkOutTitle}
+          bookingDuration={this.state.bookingDuration}
         />
         <AvailabilityWrapper roomData={this.state.roomData} />
       </React.Fragment>

@@ -73,6 +73,7 @@ class BookWrapper extends Component {
               <PricingWrapper
                 roomData={this.props.roomData}
                 isPricingDisplayed={this.props.isPricingDisplayed}
+                bookingDuration={this.props.bookingDuration}
               />
               <button id="book-button">Book</button>
               <p className="disclaimer">You won’t be charged yet</p>
