@@ -1,22 +1,7 @@
 import React, { Component } from 'react';
 
 class PricingWrapper extends Component {
-  // constructor(props){
-  // super();
-  // this.state = {};
-  // }
-
-  // componentWillMount(){}
-  // componentDidMount(){}
-  // componentWillUnmount(){}
-
-  // componentWillReceiveProps(){}
-  // shouldComponentUpdate(){}
-  // componentWillUpdate(){}
-  // componentDidUpdate(){}
-
   render() {
-    // TODO: correct this function
     let totalBookingPrice;
     if (this.props.roomData) {
       totalBookingPrice =
