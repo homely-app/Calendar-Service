@@ -41,7 +41,7 @@ class Applet extends Component {
       });
     }
 
-    if (this.state.bookingStart) {
+    if (this.state.bookingStart && day > this.state.bookingStart) {
       let duration = dateFns.differenceInCalendarDays(
         day,
         this.state.bookingStart
