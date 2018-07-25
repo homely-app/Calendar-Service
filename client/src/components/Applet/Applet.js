@@ -17,7 +17,9 @@ class Applet extends Component {
       isValidBooking: false,
       currentMonth: new Date(),
       bookingStart: null,
-      bookingEnd: null
+      bookingEnd: null,
+      checkInTitle: 'Check-in',
+      checkOutTitle: 'Check-out'
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -30,15 +32,18 @@ class Applet extends Component {
   }
 
   onDateClick(day) {
+    let formattedDate = dateFns.format(day, 'MM/DD/YYYY');
     if (!this.state.bookingStart) {
       this.setState({
-        bookingStart: day
+        bookingStart: day,
+        checkInTitle: formattedDate
       });
     }
 
     if (this.state.bookingStart) {
       this.setState({
-        bookingEnd: day
+        bookingEnd: day,
+        checkOutTitle: formattedDate
       });
     }
   }
@@ -196,12 +201,9 @@ class Applet extends Component {
   handleClick(e) {
     if (e.target.innerHTML === 'Book') {
       this.handleBookButtonClick();
-    } else if (
-      e.target.innerHTML === 'Check-in' ||
-      e.target.innerHTML === 'Check-out'
-    ) {
-      this.handleBookingClick(e.target.innerHTML);
-    } else if (e.target.innerHTML === '1 Guest') {
+    } else if (e.target.id === 'checkin' || e.target.id === 'checkout') {
+      this.handleBookingClick(e.target.id);
+    } else if (e.target.id === 'guest') {
       this.handleGuestNumberClick();
     }
     if (e.target.id === 'root') {
@@ -209,6 +211,8 @@ class Applet extends Component {
         isCheckOutDisplayed: false,
         isCheckInDisplayed: false,
         isCalendarDisplayed: false
+        // bookingStart: null,
+        // bookingEnd: null
       });
     }
   }
@@ -222,7 +226,7 @@ class Applet extends Component {
   }
 
   handleBookingClick(bookButton) {
-    if (bookButton === 'Check-in') {
+    if (bookButton === 'checkin') {
       if (this.state.isCheckOutDisplayed) {
         this.setState({ isCheckInDisplayed: true });
       } else {
@@ -230,7 +234,7 @@ class Applet extends Component {
       }
       this.setState({ isCheckInDisplayed: true });
       this.setState({ isCheckOutDisplayed: false });
-    } else if (bookButton === 'Check-out') {
+    } else if (bookButton === 'checkout') {
       if (this.state.isCheckInDisplayed) {
         this.setState({ isCheckOutDisplayed: true });
       } else {
@@ -251,6 +255,16 @@ class Applet extends Component {
     document.body.addEventListener('click', this.handleClick);
   }
 
+  componentDidUpdate() {
+    if (
+      this.state.bookingStart &&
+      this.state.bookingEnd &&
+      !this.state.isPricingDisplayed
+    ) {
+      this.setState({ isPricingDisplayed: true });
+    }
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -263,6 +277,8 @@ class Applet extends Component {
           renderHeader={this.renderHeader}
           renderDays={this.renderDays}
           renderCells={this.renderCells}
+          checkInTitle={this.state.checkInTitle}
+          checkOutTitle={this.state.checkOutTitle}
         />
         <AvailabilityWrapper roomData={this.state.roomData} />
       </React.Fragment>
