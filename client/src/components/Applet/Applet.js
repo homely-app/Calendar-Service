@@ -228,7 +228,18 @@ class Applet extends Component {
   }
 
   handleBookButtonClick() {
-    alert('booked!');
+    if (!this.state.bookingStart || !this.state.bookingEnd) {
+      alert('Please select a valid start and end date');
+    } else {
+      alert(
+        `New Booking Request: ${this.state.bookingDuration} ${
+          this.state.bookingDuration > 1 ? 'nights' : 'night'
+        } for $${this.state.roomData.price * this.state.bookingDuration +
+          this.state.roomData.serviceFee +
+          this.state.roomData.cleaningFee +
+          this.state.roomData.taxes}`
+      );
+    }
   }
 
   handleBookingClick(bookButton) {
