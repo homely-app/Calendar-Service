@@ -20,7 +20,8 @@ class Applet extends Component {
       bookingEnd: null,
       bookingDuration: 1,
       checkInTitle: 'Check-in',
-      checkOutTitle: 'Check-out'
+      checkOutTitle: 'Check-out',
+      existingBookings: []
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -32,16 +33,36 @@ class Applet extends Component {
     this.renderCells = this.renderCells.bind(this);
   }
 
+  isValidDay(day) {
+    for (let i = 0; i < this.state.existingBookings.length; i++) {
+      dateFns.isSameDay(day, this.state.existingBookings[i]);
+      if (dateFns.isSameDay(day, this.state.existingBookings[i])) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   onDateClick(day) {
     let formattedDate = dateFns.format(day, 'MM/DD/YYYY');
-    if (!this.state.bookingStart) {
+    if (
+      (!this.state.bookingStart || this.state.isCheckInDisplayed) &&
+      this.isValidDay(day)
+    ) {
       this.setState({
         bookingStart: day,
-        checkInTitle: formattedDate
+        checkInTitle: formattedDate,
+        isCheckInDisplayed: false,
+        isCheckOutDisplayed: true
       });
     }
 
-    if (this.state.bookingStart && day > this.state.bookingStart) {
+    if (
+      this.state.bookingStart &&
+      day > this.state.bookingStart &&
+      this.state.isCheckOutDisplayed &&
+      this.isValidDay(day)
+    ) {
       let duration = dateFns.differenceInCalendarDays(
         day,
         this.state.bookingStart
@@ -119,18 +140,6 @@ class Applet extends Component {
     let start = 'booking-start';
     let booking = 'booking';
     let end = 'booking-end';
-    let existingBookings = this.state.roomData.bookings;
-    let bookedDates = [];
-
-    for (let i = 0; i < existingBookings.length; i++) {
-      let duration = existingBookings[i].duration;
-      bookedDates.push(new Date(existingBookings[i].checkIn));
-      for (let j = 1; j < duration + 0; j++) {
-        bookedDates.push(
-          dateFns.addDays(new Date(existingBookings[i].checkIn), j)
-        );
-      }
-    }
 
     while (day <= endDate) {
       let cellClass;
@@ -152,8 +161,8 @@ class Applet extends Component {
           cellClass = 'col cell';
         }
 
-        for (let i = 0; i < bookedDates.length; i++) {
-          if (dateFns.isSameDay(day, bookedDates[i])) {
+        for (let i = 0; i < this.state.existingBookings.length; i++) {
+          if (dateFns.isSameDay(day, this.state.existingBookings[i])) {
             cellClass = 'col cell booked';
           }
         }
@@ -201,6 +210,7 @@ class Applet extends Component {
       })
       .then(function(myJson) {
         self.setState({ roomData: myJson[0] });
+        self.handleExistingBookings();
       });
   }
 
@@ -265,6 +275,22 @@ class Applet extends Component {
   toggleCalendar() {
     let currentState = this.state.isCalendarDisplayed;
     this.setState({ isCalendarDisplayed: !currentState });
+  }
+
+  handleExistingBookings() {
+    let existingBookings = this.state.roomData.bookings;
+    let bookedDates = [];
+
+    for (let i = 0; i < existingBookings.length; i++) {
+      let duration = existingBookings[i].duration;
+      bookedDates.push(new Date(existingBookings[i].checkIn));
+      for (let j = 1; j < duration + 0; j++) {
+        bookedDates.push(
+          dateFns.addDays(new Date(existingBookings[i].checkIn), j)
+        );
+      }
+    }
+    this.setState({ existingBookings: bookedDates });
   }
 
   componentDidMount() {
