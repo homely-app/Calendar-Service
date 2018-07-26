@@ -246,7 +246,11 @@ class Applet extends Component {
           <div
             className={cellClass}
             key={day}
-            onClick={() => this.onDateClick(dateFns.parse(cloneDay))}
+            onClick={() =>
+              calendar === 'Top'
+                ? this.onDateClick(dateFns.parse(cloneDay))
+                : null
+            }
           >
             <span className="number">{formattedDate}</span>
           </div>
