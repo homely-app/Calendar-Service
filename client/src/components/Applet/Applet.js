@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import dateFns from 'date-fns';
-
 import BookWrapper from '../BookWrapper';
 import AvailabilityWrapper from '../AvailabilityWrapper';
 
@@ -128,23 +127,49 @@ class Applet extends Component {
     });
   }
 
-  renderHeader() {
+  renderHeader(calendar) {
     const dateFormat = 'MMMM YYYY';
+    const currentMonth = dateFns.format(this.state.currentMonth, dateFormat);
+    const nextMonth = dateFns.format(
+      dateFns.addMonths(this.state.currentMonth, 1),
+      dateFormat
+    );
+    // TODO: handle lower calendar nav buttons correctly
+    const leftNavButton = (
+      <div
+        className={
+          calendar === 'Top' || calendar === 'Left' ? 'calendar-icon' : 'hidden'
+        }
+        onClick={
+          calendar === 'Top' || calendar === 'Left' ? this.prevMonth : null
+        }
+      >
+        ←
+      </div>
+    );
+    const rightNavButton = (
+      <div
+        className={
+          calendar === 'Top' || calendar === 'Right'
+            ? 'calendar-icon'
+            : 'hidden'
+        }
+        onClick={
+          calendar === 'Top' || calendar === 'Right' ? this.nextMonth : null
+        }
+      >
+        →
+      </div>
+    );
     return (
       <div className="header">
-        <div className="col col-start">
-          <div className="calendar-icon" onClick={this.prevMonth}>
-            ←
-          </div>
-        </div>
+        <div className="col col-start">{leftNavButton}</div>
         <div className="col col-center">
           <span className="calendar-header">
-            {dateFns.format(this.state.currentMonth, dateFormat)}
+            {calendar === 'Right' ? nextMonth : currentMonth}
           </span>
         </div>
-        <div className="col col-end" onClick={this.nextMonth}>
-          <div className="calendar-icon">→</div>
-        </div>
+        <div className="col col-end">{rightNavButton}</div>
       </div>
     );
   }
@@ -165,8 +190,11 @@ class Applet extends Component {
     return <div className="days row-top">{days}</div>;
   }
 
-  renderCells() {
-    const { currentMonth, bookingStart, bookingEnd } = this.state;
+  renderCells(calendar) {
+    let { currentMonth, bookingStart, bookingEnd } = this.state;
+    const nextMonth = dateFns.addMonths(this.state.currentMonth, 1);
+    currentMonth = calendar === 'Right' ? nextMonth : currentMonth;
+
     const monthStart = dateFns.startOfMonth(currentMonth);
     const monthEnd = dateFns.endOfMonth(monthStart);
     const startDate = dateFns.startOfWeek(monthStart);
@@ -383,7 +411,12 @@ class Applet extends Component {
           checkInClassSelected={this.state.checkInClassSelected}
           checkOutClassSelected={this.state.checkOutClassSelected}
         />
-        <AvailabilityWrapper roomData={this.state.roomData} />
+        <AvailabilityWrapper
+          roomData={this.state.roomData}
+          renderHeader={this.renderHeader}
+          renderDays={this.renderDays}
+          renderCells={this.renderCells}
+        />
       </React.Fragment>
     );
   }

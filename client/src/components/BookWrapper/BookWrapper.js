@@ -74,6 +74,7 @@ class BookWrapper extends Component {
                       renderHeader={this.props.renderHeader}
                       renderDays={this.props.renderDays}
                       renderCells={this.props.renderCells}
+                      whichCalendar={'Top'}
                     />
                   </div>
                 </React.Fragment>
