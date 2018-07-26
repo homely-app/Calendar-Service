@@ -339,7 +339,7 @@ class Applet extends Component {
     for (let i = 0; i < existingBookings.length; i++) {
       let duration = existingBookings[i].duration;
       bookedDates.push(new Date(existingBookings[i].checkIn));
-      for (let j = 1; j < duration + 0; j++) {
+      for (let j = 1; j < duration; j++) {
         bookedDates.push(
           dateFns.addDays(new Date(existingBookings[i].checkIn), j)
         );
