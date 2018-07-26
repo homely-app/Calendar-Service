@@ -38,7 +38,6 @@ class Applet extends Component {
       return false;
     }
     for (let i = 0; i < this.state.existingBookings.length; i++) {
-      dateFns.isSameDay(day, this.state.existingBookings[i]);
       if (dateFns.isSameDay(day, this.state.existingBookings[i])) {
         return false;
       }
@@ -49,6 +48,7 @@ class Applet extends Component {
   onDateClick(day) {
     let formattedDate = dateFns.format(day, 'MM/DD/YYYY');
 
+    // check if start date needs to be reset
     if (
       this.state.bookingEnd &&
       day > this.state.bookingEnd &&
@@ -65,6 +65,7 @@ class Applet extends Component {
       return;
     }
 
+    // check to set valid state date
     if (
       (!this.state.bookingStart || this.state.isCheckInDisplayed) &&
       this.isValidDay(day)
@@ -77,22 +78,39 @@ class Applet extends Component {
       });
     }
 
+    // check to set valid end date
     if (
       this.state.bookingStart &&
       day > this.state.bookingStart &&
       this.state.isCheckOutDisplayed &&
       this.isValidDay(day)
     ) {
-      let duration = dateFns.differenceInCalendarDays(
-        day,
-        this.state.bookingStart
-      );
-      this.setState({
-        bookingEnd: day,
-        checkOutTitle: formattedDate,
-        bookingDuration: duration
-      });
+      if (!this.isValidDuration(day)) {
+        return;
+      } else {
+        let duration = dateFns.differenceInCalendarDays(
+          day,
+          this.state.bookingStart
+        );
+        this.setState({
+          bookingEnd: day,
+          checkOutTitle: formattedDate,
+          bookingDuration: duration
+        });
+      }
     }
+  }
+
+  isValidDuration(day) {
+    console.log('validating duration');
+    let start = this.state.bookingStart;
+    let end = day;
+    for (let i = 0; i < this.state.existingBookings.length; i++) {
+      if (dateFns.isWithinRange(this.state.existingBookings[i], start, end)) {
+        return false;
+      }
+    }
+    return true;
   }
 
   nextMonth() {
@@ -171,6 +189,8 @@ class Applet extends Component {
           cellClass = `col cell ${start}`;
         } else if (dateFns.isSameDay(day, bookingEnd)) {
           cellClass = `col cell ${end}`;
+        } else if (dateFns.isPast(day)) {
+          cellClass = 'col cell booked';
         } else if (
           bookingStart &&
           bookingEnd &&
