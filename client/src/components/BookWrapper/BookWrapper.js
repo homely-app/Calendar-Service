@@ -26,13 +26,17 @@ class BookWrapper extends Component {
               <h3 className="sub-title">Dates</h3>
               <div className="book-subcontainer">
                 <div className="book-checkin-container">
-                  <h3 className="book-checkin">Check-in</h3>
+                  <h3 className="book-checkin" id="checkin">
+                    {this.props.checkInTitle}
+                  </h3>
                 </div>
                 <div className="book-arrow-container">
                   <h3 className="book-arrow">➞</h3>
                 </div>
                 <div className="book-checkout-container">
-                  <h3 className="book-checkout">Check-out</h3>
+                  <h3 className="book-checkout" id="checkout">
+                    {this.props.checkOutTitle}
+                  </h3>
                 </div>
               </div>
               {this.props.isCalendarDisplayed ? (
@@ -52,17 +56,24 @@ class BookWrapper extends Component {
                     />
                   </svg>
                   <div className="checkin-calendar-container">
-                    <Calendar />
+                    <Calendar
+                      renderHeader={this.props.renderHeader}
+                      renderDays={this.props.renderDays}
+                      renderCells={this.props.renderCells}
+                    />
                   </div>
                 </React.Fragment>
               ) : null}
               <h3 className="sub-title">Guests</h3>
               <div className="guest-subcontainer">
-                <h3 className="guest-selector">1 Guest</h3>
+                <h3 className="guest-selector" id="guest">
+                  1 Guest
+                </h3>
               </div>
               <PricingWrapper
                 roomData={this.props.roomData}
                 isPricingDisplayed={this.props.isPricingDisplayed}
+                bookingDuration={this.props.bookingDuration}
               />
               <button id="book-button">Book</button>
               <p className="disclaimer">You won’t be charged yet</p>

@@ -1,26 +1,11 @@
 import React, { Component } from 'react';
 
 class PricingWrapper extends Component {
-  // constructor(props){
-  // super();
-  // this.state = {};
-  // }
-
-  // componentWillMount(){}
-  // componentDidMount(){}
-  // componentWillUnmount(){}
-
-  // componentWillReceiveProps(){}
-  // shouldComponentUpdate(){}
-  // componentWillUpdate(){}
-  // componentDidUpdate(){}
-
   render() {
-    // TODO: correct this function
     let totalBookingPrice;
     if (this.props.roomData) {
       totalBookingPrice =
-        this.props.roomData.price +
+        this.props.roomData.price * this.props.bookingDuration +
         this.props.roomData.serviceFee +
         this.props.roomData.cleaningFee +
         this.props.roomData.taxes;
@@ -32,9 +17,12 @@ class PricingWrapper extends Component {
           <div className="pricing-container">
             <div className="pricing-subcontainer">
               <p className="pricing-item">
-                ${this.props.roomData.price} x 1 night
+                ${this.props.roomData.price} x {this.props.bookingDuration}{' '}
+                {this.props.bookingDuration > 1 ? 'nights' : 'night'}
               </p>
-              <p className="pricing-item">${this.props.roomData.price}</p>
+              <p className="pricing-item">
+                ${this.props.roomData.price * this.props.bookingDuration}
+              </p>
             </div>
             <div className="pricing-subcontainer">
               <p className="pricing-item"> Service fee</p>

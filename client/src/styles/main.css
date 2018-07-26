@@ -231,6 +231,11 @@ body {
   border: 5px dotted red;
 }
 
+.calendar .calendar-body .disabled {
+  pointer-events: none;
+  color: var(--main-bg-color);
+}
+
 .calendar {
   display: block;
   position: relative;
@@ -285,11 +290,28 @@ body {
 }
 
 .calendar .calendar-body .cell:hover {
-  transition: 0.5s ease-out;
+  background: #80f4e6;
+  color: #00ad99;
 }
 
-.calendar .calendar-body .selected {
-  background: lightblue;
+.calendar .calendar-body .booking-start {
+  background: #00ad99;
+  color: var(--main-bg-color);
+}
+
+.calendar .calendar-body .booking {
+  background: #00ad99;
+  color: var(--main-bg-color);
+}
+
+.calendar .calendar-body .booking-end {
+  background: #00ad99;
+  color: var(--main-bg-color);
+}
+
+.calendar .calendar-body .booked {
+  text-decoration: line-through;
+  opacity: 0.4;
 }
 
 .calendar .calendar-body .row:last-child {
@@ -304,10 +326,6 @@ body {
   font-size: 82.5%;
   line-height: 1;
   font-weight: 700;
-}
-
-.calendar .calendar-body .disabled {
-  pointer-events: none;
 }
 
 .calendar .calendar-body .cell .bg {
