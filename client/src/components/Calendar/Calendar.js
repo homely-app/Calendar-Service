@@ -16,7 +16,7 @@ class Calendar extends React.Component {
     return (
       <div className="calendar">
         {this.props.renderHeader(this.props.whichCalendar)}
-        {this.props.renderDays(this.props.whichCalendar)}
+        {this.props.renderDays()}
         {this.props.renderCells(this.props.whichCalendar)}
         {footer}
       </div>

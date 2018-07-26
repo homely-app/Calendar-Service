@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import dateFns from 'date-fns';
-
 import BookWrapper from '../BookWrapper';
 import AvailabilityWrapper from '../AvailabilityWrapper';
 
@@ -135,13 +134,14 @@ class Applet extends Component {
       dateFns.addMonths(this.state.currentMonth, 1),
       dateFormat
     );
+    // TODO: handle lower calendar nav buttons correctly
     const leftNavButton = (
       <div
         className={
-          calendar === 'Left' || calendar === 'Top' ? 'calendar-icon' : 'hidden'
+          calendar === 'Top' || calendar === 'Left' ? 'calendar-icon' : 'hidden'
         }
         onClick={
-          calendar === 'Left' || calendar === 'Top' ? this.prevMonth : null
+          calendar === 'Top' || calendar === 'Left' ? this.prevMonth : null
         }
       >
         ←
@@ -150,12 +150,12 @@ class Applet extends Component {
     const rightNavButton = (
       <div
         className={
-          calendar === 'Right' || calendar === 'Top'
+          calendar === 'Top' || calendar === 'Right'
             ? 'calendar-icon'
             : 'hidden'
         }
         onClick={
-          calendar === 'Right' || calendar === 'Top' ? this.prevMonth : null
+          calendar === 'Top' || calendar === 'Right' ? this.nextMonth : null
         }
       >
         →
@@ -190,8 +190,11 @@ class Applet extends Component {
     return <div className="days row-top">{days}</div>;
   }
 
-  renderCells() {
-    const { currentMonth, bookingStart, bookingEnd } = this.state;
+  renderCells(calendar) {
+    let { currentMonth, bookingStart, bookingEnd } = this.state;
+    const nextMonth = dateFns.addMonths(this.state.currentMonth, 1);
+    currentMonth = calendar === 'Right' ? nextMonth : currentMonth;
+
     const monthStart = dateFns.startOfMonth(currentMonth);
     const monthEnd = dateFns.endOfMonth(monthStart);
     const startDate = dateFns.startOfWeek(monthStart);
