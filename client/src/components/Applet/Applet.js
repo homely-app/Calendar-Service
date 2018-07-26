@@ -128,23 +128,48 @@ class Applet extends Component {
     });
   }
 
-  renderHeader() {
+  renderHeader(calendar) {
     const dateFormat = 'MMMM YYYY';
+    const currentMonth = dateFns.format(this.state.currentMonth, dateFormat);
+    const nextMonth = dateFns.format(
+      dateFns.addMonths(this.state.currentMonth, 1),
+      dateFormat
+    );
+    const leftNavButton = (
+      <div
+        className={
+          calendar === 'Left' || calendar === 'Top' ? 'calendar-icon' : 'hidden'
+        }
+        onClick={
+          calendar === 'Left' || calendar === 'Top' ? this.prevMonth : null
+        }
+      >
+        ←
+      </div>
+    );
+    const rightNavButton = (
+      <div
+        className={
+          calendar === 'Right' || calendar === 'Top'
+            ? 'calendar-icon'
+            : 'hidden'
+        }
+        onClick={
+          calendar === 'Right' || calendar === 'Top' ? this.prevMonth : null
+        }
+      >
+        →
+      </div>
+    );
     return (
       <div className="header">
-        <div className="col col-start">
-          <div className="calendar-icon" onClick={this.prevMonth}>
-            ←
-          </div>
-        </div>
+        <div className="col col-start">{leftNavButton}</div>
         <div className="col col-center">
           <span className="calendar-header">
-            {dateFns.format(this.state.currentMonth, dateFormat)}
+            {calendar === 'Right' ? nextMonth : currentMonth}
           </span>
         </div>
-        <div className="col col-end" onClick={this.nextMonth}>
-          <div className="calendar-icon">→</div>
-        </div>
+        <div className="col col-end">{rightNavButton}</div>
       </div>
     );
   }
