@@ -20,6 +20,7 @@ class AvailabilityWrapper extends Component {
               renderHeader={this.props.renderHeader}
               renderDays={this.props.renderDays}
               renderCells={this.props.renderCells}
+              isAvailabilityCalendar={true}
             />
           </div>
           <div className="calendar-container-right">
@@ -27,6 +28,7 @@ class AvailabilityWrapper extends Component {
               renderHeader={this.props.renderHeader}
               renderDays={this.props.renderDays}
               renderCells={this.props.renderCells}
+              isAvailabilityCalendar={true}
             />
           </div>
         </div>
