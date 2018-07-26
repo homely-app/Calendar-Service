@@ -114,7 +114,7 @@ class FakeDataGenerator {
       //   }
 
       const booking = new db.Booking(dataItem);
-      let temp = booking.save();
+      const temp = booking.save();
       this.data.push(temp);
     }
 
