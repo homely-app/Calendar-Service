@@ -45,6 +45,19 @@ class Applet extends Component {
 
   onDateClick(day) {
     let formattedDate = dateFns.format(day, 'MM/DD/YYYY');
+
+    if (this.state.bookingEnd && day > this.state.bookingEnd && this.state.isCheckInDisplayed) {
+      this.setState({
+        bookingStart: day,
+        bookingEnd: null,
+        checkInTitle: formattedDate,
+        checkOutTitle: 'Check-out',
+        isCheckInDisplayed: false,
+        isCheckOutDisplayed: true
+      });
+      return;
+    }
+
     if (
       (!this.state.bookingStart || this.state.isCheckInDisplayed) &&
       this.isValidDay(day)
