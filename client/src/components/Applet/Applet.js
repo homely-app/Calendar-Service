@@ -34,6 +34,9 @@ class Applet extends Component {
   }
 
   isValidDay(day) {
+    if (dateFns.isPast(day)) {
+      return false;
+    }
     for (let i = 0; i < this.state.existingBookings.length; i++) {
       dateFns.isSameDay(day, this.state.existingBookings[i]);
       if (dateFns.isSameDay(day, this.state.existingBookings[i])) {
@@ -46,7 +49,11 @@ class Applet extends Component {
   onDateClick(day) {
     let formattedDate = dateFns.format(day, 'MM/DD/YYYY');
 
-    if (this.state.bookingEnd && day > this.state.bookingEnd && this.state.isCheckInDisplayed) {
+    if (
+      this.state.bookingEnd &&
+      day > this.state.bookingEnd &&
+      this.state.isCheckInDisplayed
+    ) {
       this.setState({
         bookingStart: day,
         bookingEnd: null,
