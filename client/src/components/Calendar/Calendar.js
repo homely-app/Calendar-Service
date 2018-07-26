@@ -7,16 +7,17 @@ class Calendar extends React.Component {
   }
 
   render() {
-    const footer = this.props.isAvailabilityCalendar ? null : (
-      <h3 className="sub-title">
-        The minimum night stay for this listing varies. <br /> Updated today
-      </h3>
-    );
+    const footer =
+      this.props.whichCalendar !== 'Top' ? null : (
+        <h3 className="sub-title">
+          The minimum night stay for this listing varies. <br /> Updated today
+        </h3>
+      );
     return (
       <div className="calendar">
-        {this.props.renderHeader()}
-        {this.props.renderDays()}
-        {this.props.renderCells()}
+        {this.props.renderHeader(this.props.whichCalendar)}
+        {this.props.renderDays(this.props.whichCalendar)}
+        {this.props.renderCells(this.props.whichCalendar)}
         {footer}
       </div>
     );
