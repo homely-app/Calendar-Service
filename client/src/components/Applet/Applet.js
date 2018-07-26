@@ -20,7 +20,11 @@ class Applet extends Component {
       bookingEnd: null,
       bookingDuration: 1,
       checkInTitle: 'Check-in',
+      checkInClass: 'book-checkin',
+      checkInClassSelected: 'book-checkin-selected',
       checkOutTitle: 'Check-out',
+      checkOutClass: 'book-checkout',
+      checkOutClassSelected: 'book-checkout-selected',
       existingBookings: []
     };
 
@@ -34,8 +38,10 @@ class Applet extends Component {
   }
 
   isValidDay(day) {
+    if (dateFns.isPast(day)) {
+      return false;
+    }
     for (let i = 0; i < this.state.existingBookings.length; i++) {
-      dateFns.isSameDay(day, this.state.existingBookings[i]);
       if (dateFns.isSameDay(day, this.state.existingBookings[i])) {
         return false;
       }
@@ -45,6 +51,25 @@ class Applet extends Component {
 
   onDateClick(day) {
     let formattedDate = dateFns.format(day, 'MM/DD/YYYY');
+
+    // check if start date needs to be reset
+    if (
+      this.state.bookingEnd &&
+      day > this.state.bookingEnd &&
+      this.state.isCheckInDisplayed
+    ) {
+      this.setState({
+        bookingStart: day,
+        bookingEnd: null,
+        checkInTitle: formattedDate,
+        checkOutTitle: 'Check-out',
+        isCheckInDisplayed: false,
+        isCheckOutDisplayed: true
+      });
+      return;
+    }
+
+    // check to set valid state date
     if (
       (!this.state.bookingStart || this.state.isCheckInDisplayed) &&
       this.isValidDay(day)
@@ -57,22 +82,38 @@ class Applet extends Component {
       });
     }
 
+    // check to set valid end date
     if (
       this.state.bookingStart &&
       day > this.state.bookingStart &&
       this.state.isCheckOutDisplayed &&
       this.isValidDay(day)
     ) {
-      let duration = dateFns.differenceInCalendarDays(
-        day,
-        this.state.bookingStart
-      );
-      this.setState({
-        bookingEnd: day,
-        checkOutTitle: formattedDate,
-        bookingDuration: duration
-      });
+      if (!this.isValidDuration(day)) {
+        return;
+      } else {
+        let duration = dateFns.differenceInCalendarDays(
+          day,
+          this.state.bookingStart
+        );
+        this.setState({
+          bookingEnd: day,
+          checkOutTitle: formattedDate,
+          bookingDuration: duration
+        });
+      }
     }
+  }
+
+  isValidDuration(day) {
+    let start = this.state.bookingStart;
+    let end = day;
+    for (let i = 0; i < this.state.existingBookings.length; i++) {
+      if (dateFns.isWithinRange(this.state.existingBookings[i], start, end)) {
+        return false;
+      }
+    }
+    return true;
   }
 
   nextMonth() {
@@ -151,6 +192,8 @@ class Applet extends Component {
           cellClass = `col cell ${start}`;
         } else if (dateFns.isSameDay(day, bookingEnd)) {
           cellClass = `col cell ${end}`;
+        } else if (dateFns.isPast(day)) {
+          cellClass = 'col cell booked';
         } else if (
           bookingStart &&
           bookingEnd &&
@@ -256,19 +299,31 @@ class Applet extends Component {
     if (bookButton === 'checkin') {
       if (this.state.isCheckOutDisplayed) {
         this.setState({ isCheckInDisplayed: true });
+      } else if (
+        !this.state.isCheckInDisplayed &&
+        !this.state.isCheckOutDisplayed
+      ) {
+        this.setState({ isCheckInDisplayed: true });
+        this.toggleCalendar();
       } else {
+        this.setState({ isCheckInDisplayed: false });
         this.toggleCalendar();
       }
-      this.setState({ isCheckInDisplayed: true });
       this.setState({ isCheckOutDisplayed: false });
     } else if (bookButton === 'checkout') {
       if (this.state.isCheckInDisplayed) {
         this.setState({ isCheckOutDisplayed: true });
+      } else if (
+        !this.state.isCheckInDisplayed &&
+        !this.state.isCheckOutDisplayed
+      ) {
+        this.setState({ isCheckOutDisplayed: true });
+        this.toggleCalendar();
       } else {
+        this.setState({ isCheckOutDisplayed: false });
         this.toggleCalendar();
       }
       this.setState({ isCheckInDisplayed: false });
-      this.setState({ isCheckOutDisplayed: true });
     }
   }
 
@@ -284,7 +339,7 @@ class Applet extends Component {
     for (let i = 0; i < existingBookings.length; i++) {
       let duration = existingBookings[i].duration;
       bookedDates.push(new Date(existingBookings[i].checkIn));
-      for (let j = 1; j < duration + 0; j++) {
+      for (let j = 1; j < duration; j++) {
         bookedDates.push(
           dateFns.addDays(new Date(existingBookings[i].checkIn), j)
         );
@@ -323,6 +378,10 @@ class Applet extends Component {
           checkInTitle={this.state.checkInTitle}
           checkOutTitle={this.state.checkOutTitle}
           bookingDuration={this.state.bookingDuration}
+          checkInClass={this.state.checkInClass}
+          checkOutClass={this.state.checkOutClass}
+          checkInClassSelected={this.state.checkInClassSelected}
+          checkOutClassSelected={this.state.checkOutClassSelected}
         />
         <AvailabilityWrapper roomData={this.state.roomData} />
       </React.Fragment>
