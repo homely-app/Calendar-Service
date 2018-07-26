@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Calendar from '../Calendar';
 
 class AvailabilityWrapper extends Component {
   constructor(props) {
@@ -7,12 +8,28 @@ class AvailabilityWrapper extends Component {
 
   render() {
     return (
-      <div className="availability_container">
-        <h2 className="availability_title">Availability</h2>
+      <div className="availability-container">
+        <h2 className="availability-title">Availability</h2>
         <p>
-          The minimum night stay for this listing varies. · Updated 29 days ago
+          The minimum night stay for this listing varies. · Updated 29 minutes
+          ago
         </p>
-        <div className="calendar_container" />
+        <div className="calendar-container">
+          <div className="calendar-container-left">
+            <Calendar
+              renderHeader={this.props.renderHeader}
+              renderDays={this.props.renderDays}
+              renderCells={this.props.renderCells}
+            />
+          </div>
+          <div className="calendar-container-right">
+            <Calendar
+              renderHeader={this.props.renderHeader}
+              renderDays={this.props.renderDays}
+              renderCells={this.props.renderCells}
+            />
+          </div>
+        </div>
       </div>
     );
   }

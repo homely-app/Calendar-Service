@@ -383,7 +383,12 @@ class Applet extends Component {
           checkInClassSelected={this.state.checkInClassSelected}
           checkOutClassSelected={this.state.checkOutClassSelected}
         />
-        <AvailabilityWrapper roomData={this.state.roomData} />
+        <AvailabilityWrapper
+          roomData={this.state.roomData}
+          renderHeader={this.renderHeader}
+          renderDays={this.renderDays}
+          renderCells={this.renderCells}
+        />
       </React.Fragment>
     );
   }

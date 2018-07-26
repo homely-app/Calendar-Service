@@ -195,7 +195,7 @@ body {
   opacity: 0.7;
 }
 
-.availability_container {
+.availability-container {
   display: inline-block;
   border: 1px solid var(--second-color);
   margin: 0 auto 2rem auto;
@@ -239,14 +239,22 @@ body {
   margin-left: 2rem;
 }
 
-.availability_title {
+.availability-title {
   margin: 0 0 1rem 0;
 }
 
-.calendar_container {
+.calendar-container {
   width: 70vmin;
-  height: 30vmin;
-  border: 5px dotted red;
+  display: flex;
+  justify-content: space-between;
+}
+
+.calendar-container-left {
+  width: 47.5%;
+}
+
+.calendar-container-right {
+  width: 47.5%;
 }
 
 .calendar .calendar-body .disabled {
