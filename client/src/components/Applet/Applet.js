@@ -20,7 +20,11 @@ class Applet extends Component {
       bookingEnd: null,
       bookingDuration: 1,
       checkInTitle: 'Check-in',
+      checkInClass: 'book-checkin',
+      checkInClassSelected: 'book-checkin-selected',
       checkOutTitle: 'Check-out',
+      checkOutClass: 'book-checkout',
+      checkOutClassSelected: 'book-checkout-selected',
       existingBookings: []
     };
 
@@ -102,7 +106,6 @@ class Applet extends Component {
   }
 
   isValidDuration(day) {
-    console.log('validating duration');
     let start = this.state.bookingStart;
     let end = day;
     for (let i = 0; i < this.state.existingBookings.length; i++) {
@@ -296,19 +299,31 @@ class Applet extends Component {
     if (bookButton === 'checkin') {
       if (this.state.isCheckOutDisplayed) {
         this.setState({ isCheckInDisplayed: true });
+      } else if (
+        !this.state.isCheckInDisplayed &&
+        !this.state.isCheckOutDisplayed
+      ) {
+        this.setState({ isCheckInDisplayed: true });
+        this.toggleCalendar();
       } else {
+        this.setState({ isCheckInDisplayed: false });
         this.toggleCalendar();
       }
-      this.setState({ isCheckInDisplayed: true });
       this.setState({ isCheckOutDisplayed: false });
     } else if (bookButton === 'checkout') {
       if (this.state.isCheckInDisplayed) {
         this.setState({ isCheckOutDisplayed: true });
+      } else if (
+        !this.state.isCheckInDisplayed &&
+        !this.state.isCheckOutDisplayed
+      ) {
+        this.setState({ isCheckOutDisplayed: true });
+        this.toggleCalendar();
       } else {
+        this.setState({ isCheckOutDisplayed: false });
         this.toggleCalendar();
       }
       this.setState({ isCheckInDisplayed: false });
-      this.setState({ isCheckOutDisplayed: true });
     }
   }
 
@@ -363,6 +378,10 @@ class Applet extends Component {
           checkInTitle={this.state.checkInTitle}
           checkOutTitle={this.state.checkOutTitle}
           bookingDuration={this.state.bookingDuration}
+          checkInClass={this.state.checkInClass}
+          checkOutClass={this.state.checkOutClass}
+          checkInClassSelected={this.state.checkInClassSelected}
+          checkOutClassSelected={this.state.checkOutClassSelected}
         />
         <AvailabilityWrapper roomData={this.state.roomData} />
       </React.Fragment>

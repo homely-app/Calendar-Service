@@ -26,7 +26,14 @@ class BookWrapper extends Component {
               <h3 className="sub-title">Dates</h3>
               <div className="book-subcontainer">
                 <div className="book-checkin-container">
-                  <h3 className="book-checkin" id="checkin">
+                  <h3
+                    className={
+                      this.props.isCheckInDisplayed
+                        ? this.props.checkInClassSelected
+                        : this.props.checkInClass
+                    }
+                    id="checkin"
+                  >
                     {this.props.checkInTitle}
                   </h3>
                 </div>
@@ -34,7 +41,14 @@ class BookWrapper extends Component {
                   <h3 className="book-arrow">➞</h3>
                 </div>
                 <div className="book-checkout-container">
-                  <h3 className="book-checkout" id="checkout">
+                  <h3
+                    className={
+                      this.props.isCheckOutDisplayed
+                        ? this.props.checkOutClassSelected
+                        : this.props.checkOutClass
+                    }
+                    id="checkout"
+                  >
                     {this.props.checkOutTitle}
                   </h3>
                 </div>

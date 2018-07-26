@@ -160,10 +160,28 @@ body {
   opacity: 0.7;
 }
 
+.book-checkout-selected {
+  margin: 0;
+  font-weight: 400;
+  opacity: 1;
+  color: #007c87;
+  background: #80f4e6;
+  border-radius: 0.25rem;
+}
+
 .book-checkin {
   margin: 0;
   font-weight: 400;
   opacity: 0.7;
+}
+
+.book-checkin-selected {
+  margin: 0;
+  font-weight: 400;
+  opacity: 1;
+  color: #007c87;
+  background: #80f4e6;
+  border-radius: 0.25rem;
 }
 
 .book-arrow-container {
