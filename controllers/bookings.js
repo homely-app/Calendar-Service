@@ -9,7 +9,7 @@ module.exports = {
         if (!data || !data.length) {
           next();
         } else {
-          console.log('sample items', data[0].bookings);
+          // console.log('sample items', data[0].bookings);
           res.json(data);
         }
       })

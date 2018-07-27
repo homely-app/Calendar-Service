@@ -1,9 +1,9 @@
 const Header = require('./Header');
 
-test('should false equal false', () => {
+it('should false equal false', () => {
   expect(false).toBe(false);
 });
 
-test('should true equal true', () => {
+it('should true equal true', () => {
   expect(true).toBe(true);
 });

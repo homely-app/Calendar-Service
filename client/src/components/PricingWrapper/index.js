@@ -1,1 +1,1 @@
-export { default } from './PricingWrapper.js'
+export { default } from './PricingWrapper.js';
