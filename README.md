@@ -1,13 +1,13 @@
-# Project Name
+# Front-End-Capstone
 
-> Project description
+> This is an example airbnb booking component built during the Hack Reactor immersive's Front End Capstone project
 
 ## Related Projects
 
-- https://github.com/teamName/repo
-- https://github.com/teamName/repo
-- https://github.com/teamName/repo
-- https://github.com/teamName/repo
+- https://github.com/airfec/nick
+- https://github.com/airfec/ozge
+- https://github.com/airfec/ricky
+- https://github.com/airfec/marcellino
 
 ## Table of Contents
 
@@ -33,6 +33,5 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 From within the root directory:
 
 ```sh
-npm install -g webpack
 npm install
 ```
