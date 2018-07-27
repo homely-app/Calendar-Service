@@ -17,7 +17,7 @@
 
 ## Usage
 
-> Some usage instructions
+> Not currently deployed - see development instructions
 
 ## Requirements
 
@@ -51,7 +51,7 @@ npm run react-dev
 To run tests
 
 ```sh
-npm test
+npm /test
 ```
 
 ### Installing Dependencies
