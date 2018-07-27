@@ -1,7 +1,3 @@
-// TODO:
-// Add max adults, children, infants
-// Add occupancy fees and taxes
-
 var db = require('./models/');
 const faker = require('faker');
 const mongoose = require('mongoose');
@@ -114,7 +110,7 @@ class FakeDataGenerator {
       //   }
 
       const booking = new db.Booking(dataItem);
-      let temp = booking.save();
+      const temp = booking.save();
       this.data.push(temp);
     }
 

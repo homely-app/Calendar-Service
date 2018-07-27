@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import dateFns from 'date-fns';
 import BookWrapper from '../BookWrapper';
 import AvailabilityWrapper from '../AvailabilityWrapper';
+import Header from '../Header';
 
 class Applet extends Component {
   constructor(props) {
@@ -246,7 +247,11 @@ class Applet extends Component {
           <div
             className={cellClass}
             key={day}
-            onClick={() => this.onDateClick(dateFns.parse(cloneDay))}
+            onClick={() =>
+              calendar === 'Top'
+                ? this.onDateClick(dateFns.parse(cloneDay))
+                : null
+            }
           >
             <span className="number">{formattedDate}</span>
           </div>
@@ -394,6 +399,7 @@ class Applet extends Component {
   render() {
     return (
       <React.Fragment>
+        <Header />
         <BookWrapper
           roomData={this.state.roomData}
           isCalendarDisplayed={this.state.isCalendarDisplayed}

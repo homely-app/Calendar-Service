@@ -82,7 +82,7 @@ class BookWrapper extends Component {
               <h3 className="sub-title">Guests</h3>
               <div className="guest-subcontainer">
                 <h3 className="guest-selector" id="guest">
-                  1 Guest
+                  1 guest
                 </h3>
               </div>
               <PricingWrapper
