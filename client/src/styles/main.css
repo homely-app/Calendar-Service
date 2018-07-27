@@ -454,3 +454,51 @@ body {
   opacity: 0;
   pointer-events: none;
 }
+
+.header-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 1.5rem 0;
+  border: 1px solid var(--second-color);
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+li {
+  list-style-type: none;
+  margin-right: 2rem;
+}
+
+.logo {
+  height: 2rem;
+  margin-left: 1.5rem;
+}
+
+.search-bar {
+  margin-left: 1.5rem;
+  border: 1px solid var(--second-color);
+  font-size: 1.5rem;
+  box-shadow: -1px 2px 2px var(--second-color);
+  color: #a2a2a2;
+  padding: 1rem;
+  min-width: 25vmax;
+}
+
+.header-logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+.header-nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+}
+
+.header-nav-item {
+  font-weight: bold;
+  opacity: 0.9;
+  font-size: 0.9rem;
+}
