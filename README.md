@@ -21,7 +21,9 @@
 
 > Not currently deployed - see Development
 
-### Technology stack
+## Technology stack
+
+> A full stack react app built with the philosophy of continous-integrated, test-driven developement.
 
 - CSS
 - HTML5
