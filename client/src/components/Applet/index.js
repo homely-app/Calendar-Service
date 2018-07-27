@@ -1,1 +1,1 @@
-export { default } from './Applet.js'
+export { default } from './Applet.js';
