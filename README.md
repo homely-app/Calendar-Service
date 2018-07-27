@@ -23,7 +23,7 @@
 
 ## Technology stack
 
-> A full stack react app built with the philosophy of continous-integrated, test-driven developement.
+> A full stack react app built with the philosophy of continuously-integrated, test-driven development.
 
 - CSS
 - HTML5
