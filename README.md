@@ -1,6 +1,8 @@
-# Front-End-Capstone
+# Airbnb Booking Component - Front-End-Capstone
 
-> This is an mock-up airbnb booking component built during the Hack Reactor immersive's Front End Capstone project. This module is intended to work as a full-stack microservice integrated with my team's microservices to form a complete airbnb single item page.
+> This is an mock-up airbnb booking component built during the Hack Reactor immersive's Front End Capstone project.
+
+> This project is intended to work as a full-stack microservice integrated with my team's microservices to form a complete airbnb single item page.
 
 ## Related Projects
 
@@ -21,18 +23,18 @@
 
 ### Technology stack
 
-CSS
-HTML5
-React.js
-Node.js
-Express
-MongoDB
+- CSS
+- HTML5
+- React.js
+- Node.js
+- Express
+- MongoDB
 
-Jest
-Enzyme
-CircleCI
+- Jest
+- Enzyme
+- CircleCI
 
-Trello - https://trello.com/b/McTFtwUt/airfec-nick
+- Trello - https://trello.com/b/McTFtwUt/airfec-nick
 
 ## Requirements
 
