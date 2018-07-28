@@ -48,13 +48,16 @@ class Applet extends Component {
   }
 
   onDateClick(day) {
+    const {
+      bookingEnd, isCheckInDisplayed, bookingStart, isCheckOutDisplayed,
+    } = this.state;
     const formattedDate = dateFns.format(day, 'MM/DD/YYYY');
 
     // check if start date needs to be reset
     if (
-      this.state.bookingEnd &&
-      day > this.state.bookingEnd &&
-      this.state.isCheckInDisplayed
+      bookingEnd
+      && day > bookingEnd
+      && isCheckInDisplayed
     ) {
       this.setState({
         bookingStart: day,
@@ -62,222 +65,71 @@ class Applet extends Component {
         checkInTitle: formattedDate,
         checkOutTitle: 'Check-out',
         isCheckInDisplayed: false,
-        isCheckOutDisplayed: true
+        isCheckOutDisplayed: true,
       });
       return;
     }
 
     // check to set valid state date
     if (
-      (!this.state.bookingStart || this.state.isCheckInDisplayed) &&
-      this.isValidDay(day)
+      (!bookingStart || isCheckInDisplayed)
+      && this.isValidDay(day)
     ) {
       this.setState({
         bookingStart: day,
         checkInTitle: formattedDate,
         isCheckInDisplayed: false,
-        isCheckOutDisplayed: true
+        isCheckOutDisplayed: true,
       });
     }
 
     // check to set valid end date
     if (
-      this.state.bookingStart &&
-      day > this.state.bookingStart &&
-      this.state.isCheckOutDisplayed &&
-      this.isValidDay(day)
+      bookingStart
+      && day > bookingStart
+      && isCheckOutDisplayed
+      && this.isValidDay(day)
     ) {
       if (!this.isValidDuration(day)) {
         return;
-      } else {
-        const duration = dateFns.differenceInCalendarDays(
-          day,
-          this.state.bookingStart
-        );
-        this.setState({
-          bookingEnd: day,
-          checkOutTitle: formattedDate,
-          bookingDuration: duration
-        });
       }
-    }
-  }
-
-
-
-  nextMonth() {
-    this.setState({
-      currentMonth: dateFns.addMonths(this.state.currentMonth, 1)
-    });
-  }
-
-  prevMonth() {
-    this.setState({
-      currentMonth: dateFns.subMonths(this.state.currentMonth, 1)
-    });
-  }
-
-  renderHeader(calendar) {
-    const dateFormat = 'MMMM YYYY';
-    const currentMonth = dateFns.format(this.state.currentMonth, dateFormat);
-    const nextMonth = dateFns.format(
-      dateFns.addMonths(this.state.currentMonth, 1),
-      dateFormat
-    );
-    const leftNavButton = (
-      <div
-        className={
-          calendar === 'Top' || calendar === 'Left' ? 'calendar-icon' : 'hidden'
-        }
-        onClick={
-          calendar === 'Top' || calendar === 'Left' ? this.prevMonth : null
-        }
-      >
-        ←
-      </div>
-    );
-    const rightNavButton = (
-      <div
-        className={
-          calendar === 'Top' || calendar === 'Right'
-            ? 'calendar-icon'
-            : 'hidden'
-        }
-        onClick={
-          calendar === 'Top' || calendar === 'Right' ? this.nextMonth : null
-        }
-      >
-        →
-      </div>
-    );
-    return (
-      <div className="header">
-        <div className="col col-start">{leftNavButton}</div>
-        <div className="col col-center">
-          <span className="calendar-header">
-            {calendar === 'Right' ? nextMonth : currentMonth}
-          </span>
-        </div>
-        <div className="col col-end">{rightNavButton}</div>
-      </div>
-    );
-  }
-
-  renderDays() {
-    const dateFormat = 'dddd';
-    const days = [];
-    let startDate = dateFns.startOfWeek(this.state.currentMonth);
-    for (let i = 0; i < 7; i++) {
-      days.push(
-        <div className="col col-center" key={i}>
-          {dateFns
-            .format(dateFns.addDays(startDate, i), dateFormat)
-            .substring(0, 2)}
-        </div>
+      const duration = dateFns.differenceInCalendarDays(
+        day,
+        bookingStart,
       );
+      this.setState({
+        bookingEnd: day,
+        checkOutTitle: formattedDate,
+        bookingDuration: duration,
+      });
     }
-    return <div className="days row-top">{days}</div>;
-  }
-
-  renderCells(calendar) {
-    let { currentMonth, bookingStart, bookingEnd } = this.state;
-    const nextMonth = dateFns.addMonths(this.state.currentMonth, 1);
-    currentMonth = calendar === 'Right' ? nextMonth : currentMonth;
-
-    const monthStart = dateFns.startOfMonth(currentMonth);
-    const monthEnd = dateFns.endOfMonth(monthStart);
-    const startDate = dateFns.startOfWeek(monthStart);
-    const endDate = dateFns.endOfWeek(monthEnd);
-
-    const dateFormat = 'D';
-    const rows = [];
-    let days = [];
-    let day = startDate;
-    let formattedDate = '';
-    let disabled = 'disabled';
-    let start = 'booking-start';
-    let booking = 'booking';
-    let end = 'booking-end';
-
-    while (day <= endDate) {
-      let cellClass;
-      for (let i = 0; i < 7; i++) {
-        formattedDate = dateFns.format(day, dateFormat);
-        const cloneDay = day;
-
-        if (dateFns.isSameDay(day, bookingStart)) {
-          cellClass = `col cell ${start}`;
-        } else if (dateFns.isSameDay(day, bookingEnd)) {
-          cellClass = `col cell ${end}`;
-        } else if (dateFns.isPast(day)) {
-          cellClass = 'col cell booked';
-        } else if (
-          bookingStart &&
-          bookingEnd &&
-          dateFns.isWithinRange(day, bookingStart, bookingEnd)
-        ) {
-          cellClass = `col cell ${booking}`;
-        } else {
-          cellClass = 'col cell';
-        }
-
-        for (let i = 0; i < this.state.existingBookings.length; i += 1) {
-          if (dateFns.isSameDay(day, this.state.existingBookings[i])) {
-            cellClass = 'col cell booked';
-          }
-        }
-
-        if (!dateFns.isSameMonth(day, monthStart)) {
-          cellClass = `col cell ${disabled}`;
-        }
-
-        days.push(
-          <div
-            className={cellClass}
-            key={day}
-            onClick={() =>
-              calendar === 'Top'
-                ? this.onDateClick(dateFns.parse(cloneDay))
-                : null
-            }
-          >
-            <span className="number">
-              {formattedDate}
-            </span>
-          </div>
-        );
-        day = dateFns.addDays(day, 1);
-      }
-      rows.push(
-        <div className="row" key={day}>
-          {days}
-        </div>
-      );
-      days = [];
-    }
-
-    return <div className="calendar-body">{rows}</div>;
-  }
-
-  getRoomId() {
-    let roomIdArray = window.location.pathname.split('/');
-    let roomId = roomIdArray[roomIdArray.length - 1];
-    this.setState({ roomId: roomId });
-    return roomId;
   }
 
   getData() {
     const self = this;
-    const roomId = this.getRoomId();
+    const roomIdArray = window.location.pathname.split('/');
+    const roomId = roomIdArray[roomIdArray.length - 1];
     const endpoint = `/api/bookings/${roomId}`;
     fetch(endpoint)
-      .then(function(response) {
-        return response.json();
-      })
-      .then(function(myJson) {
+      .then(response => response.json())
+      .then((myJson) => {
         self.setState({ roomData: myJson[0] });
         self.handleExistingBookings();
       });
+  }
+
+  prevMonth() {
+    const { currentMonth } = this.state;
+    this.setState({
+      currentMonth: dateFns.subMonths(currentMonth, 1),
+    });
+  }
+
+  nextMonth() {
+    const { currentMonth } = this.state;
+    this.setState({
+      currentMonth: dateFns.addMonths(currentMonth, 1),
+    });
   }
 
   updatePricing() {
@@ -287,7 +139,7 @@ class Applet extends Component {
   isValidDuration(day) {
     const { bookingStart, existingBookings } = this.state;
     const end = day;
-    for (let i = 0; i < existingBookings.length; i++) {
+    for (let i = 0; i < existingBookings.length; i += 1) {
       if (dateFns.isWithinRange(existingBookings[i], bookingStart, end)) {
         return false;
       }
@@ -320,7 +172,7 @@ class Applet extends Component {
       this.setState({
         isCheckOutDisplayed: false,
         isCheckInDisplayed: false,
-        isCalendarDisplayed: false
+        isCalendarDisplayed: false,
       });
     }
   }
@@ -337,10 +189,10 @@ class Applet extends Component {
       alert(
         `New Booking Request: ${this.state.bookingDuration} ${
           this.state.bookingDuration > 1 ? 'nights' : 'night'
-        } for $${this.state.roomData.price * this.state.bookingDuration +
-          this.state.roomData.serviceFee +
-          this.state.roomData.cleaningFee +
-          this.state.roomData.taxes}`
+        } for $${this.state.roomData.price * this.state.bookingDuration
+          + this.state.roomData.serviceFee
+          + this.state.roomData.cleaningFee
+          + this.state.roomData.taxes}`,
       );
     }
   }
@@ -381,16 +233,159 @@ class Applet extends Component {
     const existingBookings = this.state.roomData.bookings;
     const bookedDates = [];
 
-    for (let i = 0; i < existingBookings.length; i++) {
-      let duration = existingBookings[i].duration;
+    for (let i = 0; i < existingBookings.length; i += 1) {
+      const duration = existingBookings[i].duration;
       bookedDates.push(new Date(existingBookings[i].checkIn));
-      for (let j = 1; j < duration; j++) {
+      for (let j = 1; j < duration; j += 1) {
         bookedDates.push(
           dateFns.addDays(new Date(existingBookings[i].checkIn), j)
         );
       }
     }
     this.setState({ existingBookings: bookedDates });
+  }
+
+  renderCells(calendar) {
+    let { currentMonth, bookingStart, bookingEnd } = this.state;
+    const nextMonth = dateFns.addMonths(this.state.currentMonth, 1);
+    currentMonth = calendar === 'Right' ? nextMonth : currentMonth;
+
+    const monthStart = dateFns.startOfMonth(currentMonth);
+    const monthEnd = dateFns.endOfMonth(monthStart);
+    const startDate = dateFns.startOfWeek(monthStart);
+    const endDate = dateFns.endOfWeek(monthEnd);
+
+    const dateFormat = 'D';
+    const rows = [];
+    let days = [];
+    let day = startDate;
+    let formattedDate = '';
+    const disabled = 'disabled';
+    const start = 'booking-start';
+    const booking = 'booking';
+    const end = 'booking-end';
+
+    while (day <= endDate) {
+      let cellClass;
+      for (let i = 0; i < 7; i += 1) {
+        formattedDate = dateFns.format(day, dateFormat);
+        const cloneDay = day;
+
+        if (dateFns.isSameDay(day, bookingStart)) {
+          cellClass = `col cell ${start}`;
+        } else if (dateFns.isSameDay(day, bookingEnd)) {
+          cellClass = `col cell ${end}`;
+        } else if (dateFns.isPast(day)) {
+          cellClass = 'col cell booked';
+        } else if (
+          bookingStart &&
+          bookingEnd &&
+          dateFns.isWithinRange(day, bookingStart, bookingEnd)
+        ) {
+          cellClass = `col cell ${booking}`;
+        } else {
+          cellClass = 'col cell';
+        }
+
+        for (let j = 0; j < this.state.existingBookings.length; j += 1) {
+          if (dateFns.isSameDay(day, this.state.existingBookings[j])) {
+            cellClass = 'col cell booked';
+          }
+        }
+
+        if (!dateFns.isSameMonth(day, monthStart)) {
+          cellClass = `col cell ${disabled}`;
+        }
+
+        days.push(
+          <div
+            className={cellClass}
+            key={day}
+            onClick={() =>
+              calendar === 'Top'
+                ? this.onDateClick(dateFns.parse(cloneDay))
+                : null
+            }
+          >
+            <span className="number">
+              {formattedDate}
+            </span>
+          </div>
+        );
+        day = dateFns.addDays(day, 1);
+      }
+      rows.push(
+        <div className="row" key={day}>
+          {days}
+        </div>,
+      );
+      days = [];
+    }
+
+    return <div className="calendar-body">{rows}</div>;
+  }
+
+  renderDays() {
+    const dateFormat = 'dddd';
+    const days = [];
+    const startDate = dateFns.startOfWeek(this.state.currentMonth);
+    for (let i = 0; i < 7; i += 1) {
+      days.push(
+        <div className="col col-center" key={i}>
+          {dateFns
+            .format(dateFns.addDays(startDate, i), dateFormat)
+            .substring(0, 2)}
+        </div>,
+      );
+    }
+    return <div className="days row-top">{days}</div>;
+  }
+
+  renderHeader(calendar) {
+    let { currentMonth } = this.state;
+    const dateFormat = 'MMMM YYYY';
+    currentMonth = dateFns.format(currentMonth, dateFormat);
+    const nextMonth = dateFns.format(
+      dateFns.addMonths(currentMonth, 1),
+      dateFormat,
+    );
+    const leftNavButton = (
+      <div
+        className={
+          calendar === 'Top' || calendar === 'Left' ? 'calendar-icon' : 'hidden'
+        }
+        onClick={
+          calendar === 'Top' || calendar === 'Left' ? this.prevMonth : null
+        }
+      >
+        ←
+      </div>
+    );
+    const rightNavButton = (
+      <div
+        className={
+          calendar === 'Top' || calendar === 'Right'
+            ? 'calendar-icon'
+            : 'hidden'
+        }
+        onClick={
+          calendar === 'Top' || calendar === 'Right' ? this.nextMonth : null
+        }
+      >
+        →
+      </div>
+    );
+    return (
+      <div className="header">
+        <div className="col col-start">{leftNavButton}</div>
+        <div className="col col-center">
+          <span className="calendar-header">
+            {calendar === 'Right' ? nextMonth : currentMonth}
+          </span>
+        </div>
+        <div className="col col-end">{rightNavButton}</div>
+      </div>
+    );
   }
 
   render() {
