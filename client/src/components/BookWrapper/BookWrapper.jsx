@@ -1,7 +1,7 @@
 import React from 'react';
 import FontAwesome from 'react-fontawesome';
 import PropTypes from 'prop-types';
-import PricingWrapper from '../PricingWrapper';
+import PricingWrapper from '../PricingWrapper/PricingWrapper';
 import Calendar from '../Calendar';
 
 const BookWrapper = (props) => {

@@ -20,9 +20,9 @@ beforeEach(() => {
 
 describe('Applet', function() {
   // TODO: fetch API requires a complete URL?
-  // it('should call getData when component mounts', done => {
-  //   expect(getDataSpy).toHaveBeenCalled();
-  // });
+  it('should call getData when component mounts', done => {
+    expect(getDataSpy).toHaveBeenCalled();
+  });
 
   it('should render a header', () => {
     expect(wrapper.contains(<Header />)).toBe(true);
@@ -82,7 +82,6 @@ describe('Applet', function() {
     expect(typeof instance.renderHeader).toBe('function');
     expect(typeof instance.renderDays).toBe('function');
     expect(typeof instance.renderCells).toBe('function');
-    expect(typeof instance.getRoomId).toBe('function');
     expect(typeof instance.getData).toBe('function');
     expect(typeof instance.handleClick).toBe('function');
     expect(typeof instance.handleGuestNumberClick).toBe('function');

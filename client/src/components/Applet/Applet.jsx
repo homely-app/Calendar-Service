@@ -182,17 +182,20 @@ class Applet extends Component {
   }
 
   handleBookButtonClick() {
-    const { bookingStart, bookingEnd } = this.state;
+    const {
+      bookingStart, bookingEnd, roomData, bookingDuration,
+    } = this.state;
+    const totalCost = roomData.price * bookingDuration
+    + roomData.serviceFee
+    + roomData.cleaningFee
+    + roomData.taxes;
     if (!bookingStart || !bookingEnd) {
       alert('Please select a valid start and end date');
     } else {
       alert(
-        `New Booking Request: ${this.state.bookingDuration} ${
-          this.state.bookingDuration > 1 ? 'nights' : 'night'
-        } for $${this.state.roomData.price * this.state.bookingDuration
-          + this.state.roomData.serviceFee
-          + this.state.roomData.cleaningFee
-          + this.state.roomData.taxes}`,
+        `New Booking Request: ${bookingDuration} ${
+          bookingDuration > 1 ? 'nights' : 'night'
+        } for $${totalCost}`,
       );
     }
   }
@@ -230,15 +233,16 @@ class Applet extends Component {
   }
 
   handleExistingBookings() {
-    const existingBookings = this.state.roomData.bookings;
+    const { roomData } = this.state;
+    const existingBookings = roomData.bookings;
     const bookedDates = [];
 
     for (let i = 0; i < existingBookings.length; i += 1) {
-      const duration = existingBookings[i].duration;
+      const { duration } = existingBookings[i];
       bookedDates.push(new Date(existingBookings[i].checkIn));
       for (let j = 1; j < duration; j += 1) {
         bookedDates.push(
-          dateFns.addDays(new Date(existingBookings[i].checkIn), j)
+          dateFns.addDays(new Date(existingBookings[i].checkIn), j),
         );
       }
     }
@@ -246,8 +250,9 @@ class Applet extends Component {
   }
 
   renderCells(calendar) {
-    let { currentMonth, bookingStart, bookingEnd } = this.state;
-    const nextMonth = dateFns.addMonths(this.state.currentMonth, 1);
+    let { currentMonth } = this.state;
+    const { bookingStart, bookingEnd, existingBookings } = this.state;
+    const nextMonth = dateFns.addMonths(currentMonth, 1);
     currentMonth = calendar === 'Right' ? nextMonth : currentMonth;
 
     const monthStart = dateFns.startOfMonth(currentMonth);
@@ -278,17 +283,17 @@ class Applet extends Component {
         } else if (dateFns.isPast(day)) {
           cellClass = 'col cell booked';
         } else if (
-          bookingStart &&
-          bookingEnd &&
-          dateFns.isWithinRange(day, bookingStart, bookingEnd)
+          bookingStart
+          && bookingEnd
+          && dateFns.isWithinRange(day, bookingStart, bookingEnd)
         ) {
           cellClass = `col cell ${booking}`;
         } else {
           cellClass = 'col cell';
         }
 
-        for (let j = 0; j < this.state.existingBookings.length; j += 1) {
-          if (dateFns.isSameDay(day, this.state.existingBookings[j])) {
+        for (let j = 0; j < existingBookings.length; j += 1) {
+          if (dateFns.isSameDay(day, existingBookings[j])) {
             cellClass = 'col cell booked';
           }
         }
@@ -301,16 +306,19 @@ class Applet extends Component {
           <div
             className={cellClass}
             key={day}
-            onClick={() =>
+            onClick={() => {
               calendar === 'Top'
                 ? this.onDateClick(dateFns.parse(cloneDay))
                 : null
             }
+
+            }
+            onKeyDown={this.onDateClick(dateFns.parse(cloneDay))}
           >
             <span className="number">
               {formattedDate}
             </span>
-          </div>
+          </div>,
         );
         day = dateFns.addDays(day, 1);
       }
@@ -328,7 +336,8 @@ class Applet extends Component {
   renderDays() {
     const dateFormat = 'dddd';
     const days = [];
-    const startDate = dateFns.startOfWeek(this.state.currentMonth);
+    const { currentMonth } = this.state;
+    const startDate = dateFns.startOfWeek(currentMonth);
     for (let i = 0; i < 7; i += 1) {
       days.push(
         <div className="col col-center" key={i}>
@@ -357,6 +366,7 @@ class Applet extends Component {
         onClick={
           calendar === 'Top' || calendar === 'Left' ? this.prevMonth : null
         }
+        onKeyDown={this.prevMonth}
       >
         ←
       </div>
