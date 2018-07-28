@@ -1,4 +1,4 @@
-const AvailabilityWrapper = require('./AvailabilityWrapper');
+const AvailabilityWrapper = require('./AvailabilityWrapper.jsx');
 
 test('should false equal false', () => {
   expect(false).toBe(false);

@@ -42,8 +42,9 @@
 
 An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 
-- Node 6.13.0
-- etc
+- Node v8.10.0
+- npm v3.5.2
+- MongoDB v3.6.3
 
 ### Installing Dependencies
 
@@ -69,7 +70,7 @@ To run server
 npm start
 ```
 
-To run webpack
+To run dev enviroment/webpack
 
 ```sh
 npm run react-dev

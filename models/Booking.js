@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const Schema = mongoose.Schema;
+const { Schema } = mongoose;
 
 const BookingSchema = new Schema({
   roomId: Number,
@@ -15,7 +15,7 @@ const BookingSchema = new Schema({
   maxInfants: Number,
   taxes: Number,
   funFactTitles: String,
-  funFacts: String
+  funFacts: String,
 });
 
 const Booking = mongoose.model('Booking', BookingSchema);

@@ -337,7 +337,7 @@ body {
 
 .calendar .calendar-body .booked {
   text-decoration: line-through;
-  opacity: 0.4;
+  color: #949494
 }
 
 .calendar .calendar-body .row:last-child {

@@ -1,4 +1,4 @@
-const BookWrapper = require('./BookWrapper');
+const BookWrapper = require('./BookWrapper.jsx');
 
 test('should false equal false', () => {
   expect(false).toBe(false);
