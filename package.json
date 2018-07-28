@@ -11,7 +11,8 @@
     "db:seed": "node generate.js",
     "start": "nodemon server/index.js",
     "react-dev": "webpack -d --watch",
-    "test": "jest"
+    "test": "jest",
+    "lint": "./node_modules/.bin/eslint"
   },
   "jest": {
     "collectCoverage": true,
@@ -33,6 +34,7 @@
     "express": "^4.16.3",
     "mongoose": "^5.2.4",
     "npm": "^6.2.0",
+    "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-fontawesome": "^1.6.1"
@@ -46,13 +48,17 @@
     "css-loader": "^1.0.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
-    "eslint": "^5.1.0",
-    "eslint-config-airbnb-base": "^13.0.0",
-    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
+    "eslint": "^5.2.0",
+    "eslint-config-airbnb": "^17.0.0",
+    "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-prettier": "^2.6.2",
+    "eslint-plugin-react": "^7.10.0",
     "faker": "^4.1.0",
     "jest": "^23.4.1",
     "jest-enzyme": "^6.0.2",
+    "prettier": "^1.13.7",
     "react-addons-test-utils": "^15.6.2",
     "regenerator-runtime": "^0.12.0",
     "style-loader": "^0.21.0",

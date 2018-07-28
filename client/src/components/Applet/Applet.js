@@ -8,13 +8,11 @@ class Applet extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      roomId: null,
       roomData: null,
       isCalendarDisplayed: false,
       isCheckInDisplayed: false,
       isCheckOutDisplayed: false,
       isPricingDisplayed: false,
-      isValidBooking: false,
       currentMonth: new Date(),
       bookingStart: null,
       bookingEnd: null,
@@ -25,7 +23,7 @@ class Applet extends Component {
       checkOutTitle: 'Check-out',
       checkOutClass: 'book-checkout',
       checkOutClassSelected: 'book-checkout-selected',
-      existingBookings: []
+      existingBookings: [],
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -37,20 +35,20 @@ class Applet extends Component {
     this.renderCells = this.renderCells.bind(this);
   }
 
-  isValidDay(day) {
-    if (dateFns.isPast(day)) {
-      return false;
+  componentDidMount() {
+    this.getData();
+    document.body.addEventListener('click', this.handleClick);
+  }
+
+  componentDidUpdate() {
+    const { bookingStart, bookingEnd, isPricingDisplayed } = this.state;
+    if (bookingStart && bookingEnd && !isPricingDisplayed) {
+      this.updatePricing();
     }
-    for (let i = 0; i < this.state.existingBookings.length; i++) {
-      if (dateFns.isSameDay(day, this.state.existingBookings[i])) {
-        return false;
-      }
-    }
-    return true;
   }
 
   onDateClick(day) {
-    let formattedDate = dateFns.format(day, 'MM/DD/YYYY');
+    const formattedDate = dateFns.format(day, 'MM/DD/YYYY');
 
     // check if start date needs to be reset
     if (
@@ -92,7 +90,7 @@ class Applet extends Component {
       if (!this.isValidDuration(day)) {
         return;
       } else {
-        let duration = dateFns.differenceInCalendarDays(
+        const duration = dateFns.differenceInCalendarDays(
           day,
           this.state.bookingStart
         );
@@ -105,16 +103,7 @@ class Applet extends Component {
     }
   }
 
-  isValidDuration(day) {
-    let start = this.state.bookingStart;
-    let end = day;
-    for (let i = 0; i < this.state.existingBookings.length; i++) {
-      if (dateFns.isWithinRange(this.state.existingBookings[i], start, end)) {
-        return false;
-      }
-    }
-    return true;
-  }
+
 
   nextMonth() {
     this.setState({
@@ -135,7 +124,6 @@ class Applet extends Component {
       dateFns.addMonths(this.state.currentMonth, 1),
       dateFormat
     );
-    // TODO: handle lower calendar nav buttons correctly
     const leftNavButton = (
       <div
         className={
@@ -233,7 +221,7 @@ class Applet extends Component {
           cellClass = 'col cell';
         }
 
-        for (let i = 0; i < this.state.existingBookings.length; i++) {
+        for (let i = 0; i < this.state.existingBookings.length; i += 1) {
           if (dateFns.isSameDay(day, this.state.existingBookings[i])) {
             cellClass = 'col cell booked';
           }
@@ -253,7 +241,9 @@ class Applet extends Component {
                 : null
             }
           >
-            <span className="number">{formattedDate}</span>
+            <span className="number">
+              {formattedDate}
+            </span>
           </div>
         );
         day = dateFns.addDays(day, 1);
@@ -277,8 +267,8 @@ class Applet extends Component {
   }
 
   getData() {
-    let self = this;
-    let roomId = this.getRoomId();
+    const self = this;
+    const roomId = this.getRoomId();
     const endpoint = `/api/bookings/${roomId}`;
     fetch(endpoint)
       .then(function(response) {
@@ -288,6 +278,34 @@ class Applet extends Component {
         self.setState({ roomData: myJson[0] });
         self.handleExistingBookings();
       });
+  }
+
+  updatePricing() {
+    this.setState({ isPricingDisplayed: true });
+  }
+
+  isValidDuration(day) {
+    const { bookingStart, existingBookings } = this.state;
+    const end = day;
+    for (let i = 0; i < existingBookings.length; i++) {
+      if (dateFns.isWithinRange(existingBookings[i], bookingStart, end)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  isValidDay(day) {
+    const { existingBookings } = this.state;
+    if (dateFns.isPast(day)) {
+      return false;
+    }
+    for (let i = 0; i < existingBookings.length; i += 1) {
+      if (dateFns.isSameDay(day, existingBookings[i])) {
+        return false;
+      }
+    }
+    return true;
   }
 
   handleClick(e) {
@@ -303,18 +321,17 @@ class Applet extends Component {
         isCheckOutDisplayed: false,
         isCheckInDisplayed: false,
         isCalendarDisplayed: false
-        // bookingStart: null,
-        // bookingEnd: null
       });
     }
   }
 
   handleGuestNumberClick() {
-    console.log('handleGuestNumberClick');
+    console.log('handleGuestNumberClick', this);
   }
 
   handleBookButtonClick() {
-    if (!this.state.bookingStart || !this.state.bookingEnd) {
+    const { bookingStart, bookingEnd } = this.state;
+    if (!bookingStart || !bookingEnd) {
       alert('Please select a valid start and end date');
     } else {
       alert(
@@ -329,13 +346,11 @@ class Applet extends Component {
   }
 
   handleBookingClick(bookButton) {
+    const { isCheckOutDisplayed, isCheckInDisplayed } = this.state;
     if (bookButton === 'checkin') {
-      if (this.state.isCheckOutDisplayed) {
+      if (isCheckOutDisplayed) {
         this.setState({ isCheckInDisplayed: true });
-      } else if (
-        !this.state.isCheckInDisplayed &&
-        !this.state.isCheckOutDisplayed
-      ) {
+      } else if (!isCheckInDisplayed && !isCheckOutDisplayed) {
         this.setState({ isCheckInDisplayed: true });
         this.toggleCalendar();
       } else {
@@ -344,12 +359,9 @@ class Applet extends Component {
       }
       this.setState({ isCheckOutDisplayed: false });
     } else if (bookButton === 'checkout') {
-      if (this.state.isCheckInDisplayed) {
+      if (isCheckInDisplayed) {
         this.setState({ isCheckOutDisplayed: true });
-      } else if (
-        !this.state.isCheckInDisplayed &&
-        !this.state.isCheckOutDisplayed
-      ) {
+      } else if (!isCheckInDisplayed && !isCheckOutDisplayed) {
         this.setState({ isCheckOutDisplayed: true });
         this.toggleCalendar();
       } else {
@@ -361,13 +373,13 @@ class Applet extends Component {
   }
 
   toggleCalendar() {
-    let currentState = this.state.isCalendarDisplayed;
-    this.setState({ isCalendarDisplayed: !currentState });
+    const { isCalendarDisplayed } = this.state;
+    this.setState({ isCalendarDisplayed: !isCalendarDisplayed });
   }
 
   handleExistingBookings() {
-    let existingBookings = this.state.roomData.bookings;
-    let bookedDates = [];
+    const existingBookings = this.state.roomData.bookings;
+    const bookedDates = [];
 
     for (let i = 0; i < existingBookings.length; i++) {
       let duration = existingBookings[i].duration;
@@ -381,44 +393,43 @@ class Applet extends Component {
     this.setState({ existingBookings: bookedDates });
   }
 
-  componentDidMount() {
-    this.getData();
-    document.body.addEventListener('click', this.handleClick);
-  }
-
-  componentDidUpdate() {
-    if (
-      this.state.bookingStart &&
-      this.state.bookingEnd &&
-      !this.state.isPricingDisplayed
-    ) {
-      this.setState({ isPricingDisplayed: true });
-    }
-  }
-
   render() {
+    const {
+      roomData,
+      isCalendarDisplayed,
+      isCheckInDisplayed,
+      isCheckOutDisplayed,
+      isPricingDisplayed,
+      checkInTitle,
+      checkOutTitle,
+      bookingDuration,
+      checkInClass,
+      checkOutClass,
+      checkInClassSelected,
+      checkOutClassSelected,
+    } = this.state;
     return (
       <React.Fragment>
         <Header />
         <BookWrapper
-          roomData={this.state.roomData}
-          isCalendarDisplayed={this.state.isCalendarDisplayed}
-          isCheckInDisplayed={this.state.isCheckInDisplayed}
-          isCheckOutDisplayed={this.state.isCheckOutDisplayed}
-          isPricingDisplayed={this.state.isPricingDisplayed}
+          roomData={roomData}
+          isCalendarDisplayed={isCalendarDisplayed}
+          isCheckInDisplayed={isCheckInDisplayed}
+          isCheckOutDisplayed={isCheckOutDisplayed}
+          isPricingDisplayed={isPricingDisplayed}
+          checkInTitle={checkInTitle}
+          checkOutTitle={checkOutTitle}
+          bookingDuration={bookingDuration}
+          checkInClass={checkInClass}
+          checkOutClass={checkOutClass}
+          checkInClassSelected={checkInClassSelected}
+          checkOutClassSelected={checkOutClassSelected}
           renderHeader={this.renderHeader}
           renderDays={this.renderDays}
           renderCells={this.renderCells}
-          checkInTitle={this.state.checkInTitle}
-          checkOutTitle={this.state.checkOutTitle}
-          bookingDuration={this.state.bookingDuration}
-          checkInClass={this.state.checkInClass}
-          checkOutClass={this.state.checkOutClass}
-          checkInClassSelected={this.state.checkInClassSelected}
-          checkOutClassSelected={this.state.checkOutClassSelected}
         />
         <AvailabilityWrapper
-          roomData={this.state.roomData}
+          roomData={roomData}
           renderHeader={this.renderHeader}
           renderDays={this.renderDays}
           renderCells={this.renderCells}
