@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import dateFns from 'date-fns';
-import BookWrapper from '../BookWrapper';
-import AvailabilityWrapper from '../AvailabilityWrapper';
-import Header from '../Header';
+import React, { Component } from "react";
+import dateFns from "date-fns";
+import BookWrapper from "../BookWrapper";
+import AvailabilityWrapper from "../AvailabilityWrapper";
+import Header from "../Header";
 
 class Applet extends Component {
   constructor(props) {
@@ -19,12 +19,12 @@ class Applet extends Component {
       bookingStart: null,
       bookingEnd: null,
       bookingDuration: 1,
-      checkInTitle: 'Check-in',
-      checkInClass: 'book-checkin',
-      checkInClassSelected: 'book-checkin-selected',
-      checkOutTitle: 'Check-out',
-      checkOutClass: 'book-checkout',
-      checkOutClassSelected: 'book-checkout-selected',
+      checkInTitle: "Check-in",
+      checkInClass: "book-checkin",
+      checkInClassSelected: "book-checkin-selected",
+      checkOutTitle: "Check-out",
+      checkOutClass: "book-checkout",
+      checkOutClassSelected: "book-checkout-selected",
       existingBookings: []
     };
 
@@ -50,7 +50,7 @@ class Applet extends Component {
   }
 
   onDateClick(day) {
-    let formattedDate = dateFns.format(day, 'MM/DD/YYYY');
+    let formattedDate = dateFns.format(day, "MM/DD/YYYY");
 
     // check if start date needs to be reset
     if (
@@ -62,7 +62,7 @@ class Applet extends Component {
         bookingStart: day,
         bookingEnd: null,
         checkInTitle: formattedDate,
-        checkOutTitle: 'Check-out',
+        checkOutTitle: "Check-out",
         isCheckInDisplayed: false,
         isCheckOutDisplayed: true
       });
@@ -129,7 +129,7 @@ class Applet extends Component {
   }
 
   renderHeader(calendar) {
-    const dateFormat = 'MMMM YYYY';
+    const dateFormat = "MMMM YYYY";
     const currentMonth = dateFns.format(this.state.currentMonth, dateFormat);
     const nextMonth = dateFns.format(
       dateFns.addMonths(this.state.currentMonth, 1),
@@ -139,10 +139,10 @@ class Applet extends Component {
     const leftNavButton = (
       <div
         className={
-          calendar === 'Top' || calendar === 'Left' ? 'calendar-icon' : 'hidden'
+          calendar === "Top" || calendar === "Left" ? "calendar-icon" : "hidden"
         }
         onClick={
-          calendar === 'Top' || calendar === 'Left' ? this.prevMonth : null
+          calendar === "Top" || calendar === "Left" ? this.prevMonth : null
         }
       >
         ←
@@ -151,12 +151,12 @@ class Applet extends Component {
     const rightNavButton = (
       <div
         className={
-          calendar === 'Top' || calendar === 'Right'
-            ? 'calendar-icon'
-            : 'hidden'
+          calendar === "Top" || calendar === "Right"
+            ? "calendar-icon"
+            : "hidden"
         }
         onClick={
-          calendar === 'Top' || calendar === 'Right' ? this.nextMonth : null
+          calendar === "Top" || calendar === "Right" ? this.nextMonth : null
         }
       >
         →
@@ -167,7 +167,7 @@ class Applet extends Component {
         <div className="col col-start">{leftNavButton}</div>
         <div className="col col-center">
           <span className="calendar-header">
-            {calendar === 'Right' ? nextMonth : currentMonth}
+            {calendar === "Right" ? nextMonth : currentMonth}
           </span>
         </div>
         <div className="col col-end">{rightNavButton}</div>
@@ -176,7 +176,7 @@ class Applet extends Component {
   }
 
   renderDays() {
-    const dateFormat = 'dddd';
+    const dateFormat = "dddd";
     const days = [];
     let startDate = dateFns.startOfWeek(this.state.currentMonth);
     for (let i = 0; i < 7; i++) {
@@ -194,22 +194,22 @@ class Applet extends Component {
   renderCells(calendar) {
     let { currentMonth, bookingStart, bookingEnd } = this.state;
     const nextMonth = dateFns.addMonths(this.state.currentMonth, 1);
-    currentMonth = calendar === 'Right' ? nextMonth : currentMonth;
+    currentMonth = calendar === "Right" ? nextMonth : currentMonth;
 
     const monthStart = dateFns.startOfMonth(currentMonth);
     const monthEnd = dateFns.endOfMonth(monthStart);
     const startDate = dateFns.startOfWeek(monthStart);
     const endDate = dateFns.endOfWeek(monthEnd);
 
-    const dateFormat = 'D';
+    const dateFormat = "D";
     const rows = [];
     let days = [];
     let day = startDate;
-    let formattedDate = '';
-    let disabled = 'disabled';
-    let start = 'booking-start';
-    let booking = 'booking';
-    let end = 'booking-end';
+    let formattedDate = "";
+    let disabled = "disabled";
+    let start = "booking-start";
+    let booking = "booking";
+    let end = "booking-end";
 
     while (day <= endDate) {
       let cellClass;
@@ -222,7 +222,7 @@ class Applet extends Component {
         } else if (dateFns.isSameDay(day, bookingEnd)) {
           cellClass = `col cell ${end}`;
         } else if (dateFns.isPast(day)) {
-          cellClass = 'col cell booked';
+          cellClass = "col cell booked";
         } else if (
           bookingStart &&
           bookingEnd &&
@@ -230,12 +230,12 @@ class Applet extends Component {
         ) {
           cellClass = `col cell ${booking}`;
         } else {
-          cellClass = 'col cell';
+          cellClass = "col cell";
         }
 
         for (let i = 0; i < this.state.existingBookings.length; i++) {
           if (dateFns.isSameDay(day, this.state.existingBookings[i])) {
-            cellClass = 'col cell booked';
+            cellClass = "col cell booked";
           }
         }
 
@@ -248,7 +248,7 @@ class Applet extends Component {
             className={cellClass}
             key={day}
             onClick={() =>
-              calendar === 'Top'
+              calendar === "Top"
                 ? this.onDateClick(dateFns.parse(cloneDay))
                 : null
             }
@@ -270,7 +270,7 @@ class Applet extends Component {
   }
 
   getRoomId() {
-    let roomIdArray = window.location.pathname.split('/');
+    let roomIdArray = window.location.pathname.split("/");
     let roomId = roomIdArray[roomIdArray.length - 1];
     this.setState({ roomId: roomId });
     return roomId;
@@ -291,35 +291,26 @@ class Applet extends Component {
   }
 
   handleClick(e) {
-    if (e.target.innerHTML === 'Book') {
+    if (e.target.innerHTML === "Book") {
       this.handleBookButtonClick();
-    } else if (e.target.id === 'checkin' || e.target.id === 'checkout') {
+    } else if (e.target.id === "checkin" || e.target.id === "checkout") {
       this.handleBookingClick(e.target.id);
-    } else if (e.target.id === 'guest') {
+    } else if (e.target.id === "guest") {
       this.handleGuestNumberClick();
-    }
-    if (e.target.id === 'root') {
-      this.setState({
-        isCheckOutDisplayed: false,
-        isCheckInDisplayed: false,
-        isCalendarDisplayed: false
-        // bookingStart: null,
-        // bookingEnd: null
-      });
     }
   }
 
   handleGuestNumberClick() {
-    console.log('handleGuestNumberClick');
+    console.log("handleGuestNumberClick");
   }
 
   handleBookButtonClick() {
     if (!this.state.bookingStart || !this.state.bookingEnd) {
-      alert('Please select a valid start and end date');
+      alert("Please select a valid start and end date");
     } else {
       alert(
         `New Booking Request: ${this.state.bookingDuration} ${
-          this.state.bookingDuration > 1 ? 'nights' : 'night'
+          this.state.bookingDuration > 1 ? "nights" : "night"
         } for $${this.state.roomData.price * this.state.bookingDuration +
           this.state.roomData.serviceFee +
           this.state.roomData.cleaningFee +
@@ -329,7 +320,7 @@ class Applet extends Component {
   }
 
   handleBookingClick(bookButton) {
-    if (bookButton === 'checkin') {
+    if (bookButton === "checkin") {
       if (this.state.isCheckOutDisplayed) {
         this.setState({ isCheckInDisplayed: true });
       } else if (
@@ -343,7 +334,7 @@ class Applet extends Component {
         this.toggleCalendar();
       }
       this.setState({ isCheckOutDisplayed: false });
-    } else if (bookButton === 'checkout') {
+    } else if (bookButton === "checkout") {
       if (this.state.isCheckInDisplayed) {
         this.setState({ isCheckOutDisplayed: true });
       } else if (
@@ -383,7 +374,19 @@ class Applet extends Component {
 
   componentDidMount() {
     this.getData();
-    document.body.addEventListener('click', this.handleClick);
+    document.body.addEventListener("click", e => {
+      console.log(e.target);
+      if (e.target === document.body) {
+        e.stopImmediatePropagation();
+        this.setState({
+          isCheckOutDisplayed: false,
+          isCheckInDisplayed: false,
+          isCalendarDisplayed: false
+        });
+      } else {
+        this.handleClick(e);
+      }
+    });
   }
 
   componentDidUpdate() {
