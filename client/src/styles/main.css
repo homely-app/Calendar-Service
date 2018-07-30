@@ -16,7 +16,7 @@ body {
   /* text-align: center; */
 }
 
-.container {
+.booking-container {
   display: inline-block;
   width: 25rem;
   border: 1px solid var(--second-color);

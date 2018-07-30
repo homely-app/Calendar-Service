@@ -1,11 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 class Header extends Component {
   render() {
     return (
       <div className="header-container">
         <div className="header-logo-container">
-          <img className="logo" src="/images/airbnb_logo.png" alt="Not Found" />
+          <img
+            className="logo"
+            src="http://www.logoeps.net/wp-content/uploads/2016/12/airbnb_logo.png"
+            alt="Not Found"
+          />
           <input className="search-bar" defaultValue="Anywhere" />
         </div>
         <div className="header-nav-container">
