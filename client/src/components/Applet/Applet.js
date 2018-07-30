@@ -278,7 +278,7 @@ class Applet extends Component {
   getData() {
     let self = this;
     let roomId = this.getRoomId();
-    const endpoint = `/api/bookings/${roomId}`;
+    const endpoint = `/api/rooms/${roomId}/bookings`;
     fetch(endpoint)
       .then(function(response) {
         return response.json();
