@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import FontAwesome from 'react-fontawesome';
-import PricingWrapper from '../PricingWrapper';
-import Calendar from '../Calendar';
+import React, { Component } from "react";
+import FontAwesome from "react-fontawesome";
+import PricingWrapper from "../PricingWrapper";
+import Calendar from "../Calendar";
 class BookWrapper extends Component {
   constructor(props) {
     super(props);
@@ -9,13 +9,13 @@ class BookWrapper extends Component {
 
   render() {
     let containerPointerClass = this.props.isCheckOutDisplayed
-      ? 'checkin-calendar-container-pointer rotate'
-      : 'checkin-calendar-container-pointer';
+      ? "checkin-calendar-container-pointer rotate"
+      : "checkin-calendar-container-pointer";
 
     return (
       <React.Fragment>
         {this.props.roomData ? (
-          <div className="container">
+          <div className="booking-container">
             <div className="price-container">
               <h2 className="price">
                 ${this.props.roomData.price}
@@ -74,7 +74,7 @@ class BookWrapper extends Component {
                       renderHeader={this.props.renderHeader}
                       renderDays={this.props.renderDays}
                       renderCells={this.props.renderCells}
-                      whichCalendar={'Top'}
+                      whichCalendar={"Top"}
                     />
                   </div>
                 </React.Fragment>
