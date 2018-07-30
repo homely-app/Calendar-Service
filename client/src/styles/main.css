@@ -12,8 +12,8 @@ body {
   background-color: var(--main-bg-color);
   color: var(--main-font-color);
   font-family: Helvetica, sans-serif;
-  padding: 2rem 2rem;
-  text-align: center;
+  margin: 0;
+  /* text-align: center; */
 }
 
 .container {
@@ -337,7 +337,7 @@ body {
 
 .calendar .calendar-body .booked {
   text-decoration: line-through;
-  color: #949494
+  color: #949494;
 }
 
 .calendar .calendar-body .row:last-child {
@@ -460,7 +460,7 @@ body {
   display: flex;
   align-items: center;
   padding: 1.5rem 0;
-  border: 1px solid var(--second-color);
+  /* border: 1px solid var(--second-color); */
   justify-content: space-between;
   margin-bottom: 2rem;
 }
