@@ -12,7 +12,7 @@
     "start": "nodemon server/index.js",
     "react-dev": "webpack -d --watch",
     "test": "jest",
-    "lint": "./node_modules/.bin/eslint"
+    "start:pro": "node generate.js && webpack -d && node server/"
   },
   "jest": {
     "collectCoverage": true,

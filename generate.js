@@ -1,6 +1,6 @@
-import faker from 'faker';
-import mongoose from 'mongoose';
-import db from './models';
+const faker = require('faker');
+const mongoose = require('mongoose');
+const db = require('./models/');
 
 class FakeDataGenerator {
   constructor() {
