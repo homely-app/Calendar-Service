@@ -195,7 +195,6 @@ body {
 }
 
 .availability-container {
-  display: inline-block;
   border: 1px solid var(--second-color);
   padding: 2rem 2rem 2rem 2rem;
   text-align: left;
@@ -242,7 +241,6 @@ body {
 }
 
 .calendar-container {
-  width: 70vmin;
   display: flex;
   justify-content: space-between;
 }
