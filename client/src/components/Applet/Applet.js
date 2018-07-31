@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ReactDOM from "react-dom";
 import dateFns from "date-fns";
 import BookWrapper from "../BookWrapper";
 import AvailabilityWrapper from "../AvailabilityWrapper";
@@ -396,6 +397,16 @@ class Applet extends Component {
     ) {
       this.setState({ isPricingDisplayed: true });
     }
+
+    ReactDOM.render(
+      <AvailabilityWrapper
+        roomData={this.state.roomData}
+        renderHeader={this.renderHeader}
+        renderDays={this.renderDays}
+        renderCells={this.renderCells}
+      />,
+      document.getElementById("availability")
+    );
   }
 
   render() {
@@ -417,12 +428,6 @@ class Applet extends Component {
           checkOutClass={this.state.checkOutClass}
           checkInClassSelected={this.state.checkInClassSelected}
           checkOutClassSelected={this.state.checkOutClassSelected}
-        />
-        <AvailabilityWrapper
-          roomData={this.state.roomData}
-          renderHeader={this.renderHeader}
-          renderDays={this.renderDays}
-          renderCells={this.renderCells}
         />
       </React.Fragment>
     );
