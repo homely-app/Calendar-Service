@@ -375,7 +375,7 @@ class Applet extends Component {
   componentDidMount() {
     this.getData();
     document.body.addEventListener("click", e => {
-      console.log(e.target);
+      // console.log(e.target);
       if (e.target === document.body) {
         e.stopImmediatePropagation();
         this.setState({

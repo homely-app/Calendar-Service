@@ -457,7 +457,7 @@ body {
   width: 100%;
   display: flex;
   align-items: center;
-  padding: 1.5rem 0;
+  padding: 1.25rem 0;
   justify-content: space-between;
 }
 
@@ -474,10 +474,10 @@ li {
 .search-bar {
   margin-left: 1.5rem;
   border: 1px solid var(--second-color);
-  font-size: 1.5rem;
+  font-size: 1rem;
   box-shadow: -1px 2px 2px var(--second-color);
-  color: #a2a2a2;
-  padding: 1rem;
+  color: #707070;
+  padding: 0.75rem;
   min-width: 25vmax;
 }
 
