@@ -460,9 +460,7 @@ body {
   display: flex;
   align-items: center;
   padding: 1.5rem 0;
-  /* border: 1px solid var(--second-color); */
   justify-content: space-between;
-  margin-bottom: 2rem;
 }
 
 li {
