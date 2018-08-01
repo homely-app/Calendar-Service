@@ -195,7 +195,7 @@ body {
 }
 
 .availability-container {
-  border: 1px solid var(--second-color);
+  border-bottom: 1px solid var(--second-color);
   padding: 2rem 2rem 2rem 2rem;
   text-align: left;
 }
@@ -237,6 +237,8 @@ body {
 }
 
 .availability-title {
+  font-size: 1rem;
+  font-weight: bold;
   margin: 0 0 1rem 0;
 }
 
@@ -381,7 +383,8 @@ body {
 .calendar-header {
   padding: 0.5rem 0;
   flex: 1 1 auto;
-  /* font-size: 1rem; */
+  font-size: 1.25rem;
+  font-weight: bold;
 }
 
 .row {

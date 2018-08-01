@@ -12,7 +12,7 @@
     "start": "nodemon server/index.js",
     "react-dev": "webpack -d --watch",
     "test": "jest",
-    "start:pro": "node generate.js && webpack -d && node server/ && grunt deploy"
+    "start:pro": "node generate.js && webpack -d && grunt deploy && node server/"
   },
   "jest": {
     "collectCoverage": true,
