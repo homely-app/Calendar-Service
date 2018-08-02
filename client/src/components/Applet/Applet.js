@@ -297,6 +297,12 @@ class Applet extends Component {
       this.handleBookingClick(e.target.id);
     } else if (e.target.id === "guest") {
       this.handleGuestNumberClick();
+    } else if (e.target.id === "content-container") {
+      this.setState({
+        isCheckOutDisplayed: false,
+        isCheckInDisplayed: false,
+        isCalendarDisplayed: false
+      });
     }
   }
 
