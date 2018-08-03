@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
-//TODO: change localhost to database
-const IP = 'localhost:27017';
+const IP = 'database:27017';
 const dbURI = process.env.MONGODB_URI || `mongodb://${IP}/bookings`;
 
 mongoose.connect(
