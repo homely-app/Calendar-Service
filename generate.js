@@ -1,6 +1,6 @@
-const db = require("./models/");
-const faker = require("faker");
-const mongoose = require("mongoose");
+const db = require('./models/');
+const faker = require('faker');
+const mongoose = require('mongoose');
 
 class FakeDataGenerator {
   constructor() {
@@ -25,7 +25,7 @@ class FakeDataGenerator {
 
       for (let i = 0; i < dataItem.numberOfBookings; i++) {
         let booking = {};
-        booking.checkIn = faker.date.between("2018-07-24", "2019-12-31");
+        booking.checkIn = faker.date.between('2018-07-24', '2019-12-31');
         booking.duration = faker.random.number({
           min: 1,
           max: 31
@@ -73,19 +73,26 @@ class FakeDataGenerator {
       });
 
       let num2 = faker.random.number({
-        max: 1
+        max: 7
       });
 
       const funFactTitles = [
-        "This house is haunted.",
-        "This was Elon Musk's first apartment.",
-        "This place has a great view of the park.",
-        "This place has amazing air conditioning.",
-        "This is a very popular booking."
+        'This house is haunted.',
+        'This was Elon Musk\'s first apartment.',
+        'This place has a great view of the park.',
+        'This place has amazing air conditioning.',
+        'This is a very popular booking.',
+        'People are talking about this place.'
       ];
       const funFacts = [
-        "It’s been viewed 500+ times in the past week.",
-        `It’s been booked ${dataItem.taxes} times in the past year.`
+        'It’s been viewed 500+ times in the past week.',
+        `It’s been booked ${dataItem.taxes} times in the past year.`,
+        'The owner takes pictures of all the tenants.',
+        'This is a top rated listing.',
+        'The owner is a gentleman and a scholar.',
+        'The owner is well-liked in his community.',
+        'It\'s rated in the top 5% for hospitality.',
+        'It\'s rated in the top 5% for cleanliness.'
       ];
 
       dataItem.funFactTitles = funFactTitles[num1];
@@ -114,8 +121,8 @@ class FakeDataGenerator {
     // close connection to db
     Promise.all(this.data)
       .then(function(results) {
-        console.log("sample item", results[0].bookings[0]);
-        console.log(results.length + " entrys saved in DataBase");
+        console.log('sample item', results[0].bookings[0]);
+        console.log(results.length + ' entrys saved in DataBase');
       })
       .catch(function(err) {
         console.error(err);
