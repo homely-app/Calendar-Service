@@ -385,7 +385,7 @@ body {
   .calendar-header {
     padding: 0.5rem 0;
     flex: 1 1 auto;
-    font-size: 1.25rem;
+    font-size: 1rem;
     font-weight: bold;
   }
 
@@ -462,7 +462,6 @@ body {
     align-items: center;
     padding: 1.25rem 0;
     justify-content: space-between;
-    height: 5rem;
   }
 
   li {

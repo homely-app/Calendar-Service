@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+// TODO: Implement .env variables
 const IP = 'database:27017';
 const dbURI = process.env.MONGODB_URI || `mongodb://${IP}/bookings`;
 
