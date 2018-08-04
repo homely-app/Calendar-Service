@@ -73,22 +73,26 @@ class FakeDataGenerator {
       });
 
       let num2 = faker.random.number({
-        max: 5
+        max: 7
       });
 
       const funFactTitles = [
-        'This home is a former meth lab.',
         'This house is haunted.',
-        'Someone died here last year.',
-        'Don\'t book this place...please.',
-        'This owner takes pictures of all tenants.'
+        'This was Elon Musk\'s first apartment.',
+        'This place has a great view of the park.',
+        'This place has amazing air conditioning.',
+        'This is a very popular booking.',
+        'People are talking about this place.'
       ];
       const funFacts = [
-        'It’s been raided 50+ times in the past month.',
-        'It’s been condemned twice in the past month.',
-        'It’s been viewed 50,000+ times in the past week.',
-        'It’s been desecrated 25+ times in the past month.',
-        'It’s been defiled 100+ times in the past month.'
+        'It’s been viewed 500+ times in the past week.',
+        `It’s been booked ${dataItem.taxes} times in the past year.`,
+        'The owner takes pictures of all the tenants.',
+        'This is a top rated listing.',
+        'The owner is a gentleman and a scholar.',
+        'The owner is well-liked in his community.',
+        'It\'s rated in the top 5% for hospitality.',
+        'It\'s rated in the top 5% for cleanliness.'
       ];
 
       dataItem.funFactTitles = funFactTitles[num1];

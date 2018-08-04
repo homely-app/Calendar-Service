@@ -19,7 +19,7 @@
 
 ## Usage
 
-> Not currently deployed - see Development
+> Visit our site! - http://www.frontendcapstone.fun
 
 ## Technology stack
 

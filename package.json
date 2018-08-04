@@ -27,7 +27,8 @@
       "react",
       "enzyme",
       "jest-enzyme"
-    ]
+    ],
+    "testURL": "http://localhost"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
