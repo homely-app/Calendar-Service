@@ -421,39 +421,16 @@ class Applet extends Component {
     ) {
       this.setState({ isPricingDisplayed: true });
     }
+  }
 
-    ReactDOM.render(
+  render() {
+    return (
       <AvailabilityWrapper
         roomData={this.state.roomData}
         renderHeader={this.renderHeader}
         renderDays={this.renderDays}
         renderCells={this.renderCells}
-      />,
-      document.getElementById('availability')
-    );
-  }
-
-  render() {
-    return (
-      <React.Fragment>
-        <BookWrapper
-          roomData={this.state.roomData}
-          isCalendarDisplayed={this.state.isCalendarDisplayed}
-          isCheckInDisplayed={this.state.isCheckInDisplayed}
-          isCheckOutDisplayed={this.state.isCheckOutDisplayed}
-          isPricingDisplayed={this.state.isPricingDisplayed}
-          renderHeader={this.renderHeader}
-          renderDays={this.renderDays}
-          renderCells={this.renderCells}
-          checkInTitle={this.state.checkInTitle}
-          checkOutTitle={this.state.checkOutTitle}
-          bookingDuration={this.state.bookingDuration}
-          checkInClass={this.state.checkInClass}
-          checkOutClass={this.state.checkOutClass}
-          checkInClassSelected={this.state.checkInClassSelected}
-          checkOutClassSelected={this.state.checkOutClassSelected}
-        />
-      </React.Fragment>
+      />
     );
   }
 }
