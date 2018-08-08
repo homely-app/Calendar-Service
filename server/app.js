@@ -18,6 +18,21 @@ app.get('/rooms/:id', function(req, res) {
   res.sendFile(reactPath);
 });
 
+app.put('/rooms/:id', function(req, res) {
+  const reactPath = path.join(__dirname, '../public/index.html');
+  res.sendFile(reactPath);
+});
+
+app.post('/rooms/:id', function(req, res) {
+  const reactPath = path.join(__dirname, '../public/index.html');
+  res.sendFile(reactPath);
+});
+
+app.delete('/rooms/:id', function(req, res) {
+  const reactPath = path.join(__dirname, '../public/index.html');
+  res.sendFile(reactPath);
+});
+
 app.use('/api', routes);
 
 module.exports = app;
