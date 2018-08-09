@@ -81,3 +81,13 @@ To run tests
 ```sh
 npm test
 ```
+
+## CRUD API
+
+| HTTP METHOD | URL | REQUEST BODY | RESULT |
+|:----:|:-----------|:------------:|:-------|
+| GET | `/rooms/:id/bookings` | none | a JSON array of posts |
+| POST | `/rooms/:id/bookings` | JSON, formatted like this: ` {  id: "id", checkIn: "checkinDate", checkOut: "checkoutDate"  } `| JSON of the date you want to book |
+| PUT | `/rooms/:id/bookings` | JSON, formatted like this: ` {  id: "id", checkIn: "checkinDate", checkOut: "checkoutDate"  } ` | JSON of the altered date |
+| DELETE | `/rooms/:id/bookings` | none | deletes the dataset from the database |
+
