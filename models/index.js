@@ -1,11 +1,11 @@
 const Pool = require('pg').Pool;
 
 const config = {
-  host: 'ec2-52-91-195-117.compute-1.amazonaws.com',
-  user: 'ec2-user',
-  password: null,
-  database: 'airfeccalendar',
-  port: 5432
+  host: process.env.PG_HOST,
+  user: process.env.PG_USER,
+  password: process.env.PG_PASSWORD,
+  database: process.env.DATABASE,
+  port: process.env.PG_PORT
 }
 
 const pool = new Pool(config);

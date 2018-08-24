@@ -1,3 +1,4 @@
+const dotenv = require('dotenv').config();
 const newRelic = require('newrelic');
 const express = require('express');
 const routes = require('./../routes');
