@@ -137,7 +137,7 @@ class Applet extends Component {
       dateFns.addMonths(this.state.currentMonth, 1),
       dateFormat
     );
-    // TODO: handle lower calendar nav buttons correctly
+
     const leftNavButton = (
       <div
         className={
@@ -147,7 +147,6 @@ class Applet extends Component {
           calendar === 'Top' || calendar === 'Left' ? this.prevMonth : null
         }
       >
-        ←
       </div>
     );
     const rightNavButton = (
@@ -161,7 +160,7 @@ class Applet extends Component {
           calendar === 'Top' || calendar === 'Right' ? this.nextMonth : null
         }
       >
-        →
+
       </div>
     );
     return (
@@ -279,15 +278,15 @@ class Applet extends Component {
   }
 
   getData() {
+    console.log('getting data');
     let self = this;
     let roomId = this.getRoomId();
-    const endpoint = `/api/rooms/${roomId}/bookings`;
-    fetch(endpoint)
+    fetch(`/api/rooms/${roomId}/calendar`)
       .then(function(response) {
         return response.json();
       })
       .then(function(myJson) {
-        self.setState({ roomData: myJson[0] });
+        self.setState({ roomData: myJson });
         self.handleExistingBookings();
       });
   }
@@ -330,12 +329,12 @@ class Applet extends Component {
         duration: this.state.bookingDuration
       };
       // console.log(newBooking);
-      let roomData = this.state.roomData;
-      let existingBookings = roomData.bookings.slice();
+      let roomBookings = this.state.roomData.bookings;
+      let existingBookings = roomBookings;
       existingBookings.push(newBooking);
-      roomData.bookings = existingBookings;
+      roomBookings = existingBookings;
       this.setState({
-        roomData: roomData,
+        roomData: roomBookings,
         isCalendarDisplayed: false,
         isCheckInDisplayed: false,
         isCheckOutDisplayed: false
@@ -381,19 +380,20 @@ class Applet extends Component {
   }
 
   handleExistingBookings() {
-    let existingBookings = this.state.roomData.bookings;
-    let bookedDates = [];
+    console.log(this.state.roomData);
+    // let existingBookings = this.state.roomData.bookings;
+    // let bookedDates = [];
 
-    for (let i = 0; i < existingBookings.length; i++) {
-      let duration = existingBookings[i].duration;
-      bookedDates.push(new Date(existingBookings[i].checkIn));
-      for (let j = 1; j < duration; j++) {
-        bookedDates.push(
-          dateFns.addDays(new Date(existingBookings[i].checkIn), j)
-        );
-      }
-    }
-    this.setState({ existingBookings: bookedDates });
+    // for (let i = 0; i < existingBookings.length; i++) {
+    //   let duration = existingBookings[i].duration;
+    //   bookedDates.push(new Date(existingBookings[i].checkIn));
+    //   for (let j = 1; j < duration; j++) {
+    //     bookedDates.push(
+    //       dateFns.addDays(new Date(existingBookings[i].checkIn), j)
+    //     );
+    //   }
+    // }
+    // this.setState({ existingBookings: bookedDates });
   }
 
   componentDidMount() {
