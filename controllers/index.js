@@ -1,3 +1,3 @@
 module.exports = {
-  bookings: require('./bookings')
+  calendar: require('./calendar')
 };
