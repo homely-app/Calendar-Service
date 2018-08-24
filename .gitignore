@@ -30,5 +30,7 @@ data/
 aws-keys.json
 
 # New Relic
-newrelic.js
 newrelic_agent.log
+
+# Env 
+.env
