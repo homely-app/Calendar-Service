@@ -2,7 +2,7 @@
   "name": "bookingcomponent",
   "version": "1.0.0",
   "description": "an airbnb booking component",
-  "author": "Nicholas Vincent-Hill",
+  "author": "Nicholas Vincent-Hill and Courtney Chao",
   "license": "",
   "engines": {
     "node": ">=6.13.0"
@@ -31,14 +31,20 @@
     "testURL": "http://localhost"
   },
   "dependencies": {
+    "bluebird": "^3.5.1",
     "body-parser": "^1.18.3",
     "date-fns": "^1.29.0",
     "express": "^4.16.3",
+    "json-2-csv": "^2.2.1",
     "mongoose": "^5.2.4",
+    "newrelic": "^4.8.0",
     "npm": "^6.2.0",
+    "pg-promise": "^8.4.5",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
-    "react-fontawesome": "^1.6.1"
+    "react-fontawesome": "^1.6.1",
+    "redis": "^2.8.0",
+    "siege": "^0.2.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
