@@ -1,39 +1,28 @@
-require('dotenv').config();
-const mongoose = require('mongoose');
+const Pool = require('pg').Pool;
 
-// TODO: Implement .env variables
-const IP = 'database:27017';
-const dbURI = process.env.MONGODB_URI || `mongodb://${IP}/bookings`;
+const config = {
+  host: 'localhost',
+  user: 'Chao',
+  password: '',
+  database: 'calendar',
+  port: 5432
+}
 
-mongoose.connect(
-  dbURI,
-  {
-    useNewUrlParser: true
-  }
-);
+const pool = new Pool(config);
 
-mongoose.connection.on('connected', function() {
-  console.log('Mongoose default connection open to ' + dbURI);
-});
+// const getRoomData = (params, callback) => {
+//   const query = 'SELECT * FROM bookings WHERE bookings.roomId = $1';
+//   pool.query(query, [params], (err, data) => {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       callback(data);
+//     }
+//   })
+// }
 
-// If the connection throws an error
-mongoose.connection.on('error', function(err) {
-  console.log('Mongoose default connection error: ' + err);
-});
+module.exports = {
+  pool: pool,
+//  getRoomData
+};
 
-// When the connection is disconnected
-mongoose.connection.on('disconnected', function() {
-  console.log('Mongoose default connection disconnected');
-});
-
-// If the Node process ends, close the Mongoose connection
-process.on('SIGINT', function() {
-  mongoose.connection.close(function() {
-    console.log(
-      'Mongoose default connection disconnected through app termination'
-    );
-    process.exit(0);
-  });
-});
-
-module.exports = { Booking: require('./Booking') };
