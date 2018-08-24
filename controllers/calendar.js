@@ -13,7 +13,6 @@ module.exports = {
           if (err) {
             throw err;
           } else {
-            //sep bookings and return as array 'bookings': []
             let idealData = {};
 
             idealData.roomId = data.rows[0].roomId;
