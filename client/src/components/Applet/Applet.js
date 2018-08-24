@@ -278,7 +278,6 @@ class Applet extends Component {
   }
 
   getData() {
-    console.log('getting data');
     let self = this;
     let roomId = this.getRoomId();
     fetch(`/api/rooms/${roomId}/calendar`)
@@ -286,7 +285,7 @@ class Applet extends Component {
         return response.json();
       })
       .then(function(myJson) {
-        self.setState({ roomData: myJson });
+        self.setState({ roomData: myJson[0] });
         self.handleExistingBookings();
       });
   }
@@ -380,20 +379,19 @@ class Applet extends Component {
   }
 
   handleExistingBookings() {
-    console.log(this.state.roomData);
-    // let existingBookings = this.state.roomData.bookings;
-    // let bookedDates = [];
+    let existingBookings = this.state.roomData.bookings;
+    let bookedDates = [];
 
-    // for (let i = 0; i < existingBookings.length; i++) {
-    //   let duration = existingBookings[i].duration;
-    //   bookedDates.push(new Date(existingBookings[i].checkIn));
-    //   for (let j = 1; j < duration; j++) {
-    //     bookedDates.push(
-    //       dateFns.addDays(new Date(existingBookings[i].checkIn), j)
-    //     );
-    //   }
-    // }
-    // this.setState({ existingBookings: bookedDates });
+    for (let i = 0; i < existingBookings.length; i++) {
+      let duration = existingBookings[i].duration;
+      bookedDates.push(new Date(existingBookings[i].checkIn));
+      for (let j = 1; j < duration; j++) {
+        bookedDates.push(
+          dateFns.addDays(new Date(existingBookings[i].checkIn), j)
+        );
+      }
+    }
+    this.setState({ existingBookings: bookedDates });
   }
 
   componentDidMount() {
