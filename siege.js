@@ -10,7 +10,7 @@ for (let i = 0; i < arrSize; i += 1) {
   randomNumbers.push(random(9500000, 10000000));
 }
 
-let sieger = siege().on(80).concurrent(6);
+let sieger = siege().on(3005).concurrent(6);
 
 for (let i = 0; i < randomNumbers.length; i += 1) {
   sieger = sieger.for(1).times.get(`/api/rooms/${randomNumbers[i]}/calendar`);

@@ -6,7 +6,7 @@ const ctrl = require('../controllers');
 
 const app = express();
 
-app.set('port', process.env.PORT || 80);
+app.set('port', process.env.PORT || 3005);
 
 app.get('/', function(req, res) {
   res.redirect('/rooms/1');
